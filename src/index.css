@@ -1,4 +1,5 @@
 :root {
+  --size-1: 0.0625rem;
   --size-2: 0.125rem;
   --size-4: 0.25rem;
   --size-8: 0.5rem;
@@ -59,6 +60,14 @@
   --color-green: 73 221 59;
   --color-white: 239 239 239;
   --color-black: 15 15 15;
+
+  --border-thin: var(--size-1) solid rgb(var(--color-primary));
+  --border-normal: var(--size-2) solid rgb(var(--color-primary));
+  --border-opacity: var(--size-2) solid rgb(var(--color-primary) / 0.2);
+  --border-dashed: var(--size-2) dashed rgb(var(--color-title));
+
+  --shadow-btn: 0 0 var(--size-16) rgb(var(--color-primary) / 0.5);
+  --shadow-task: 0 0 var(--size-28) rgb(var(--color-primary) / 0.5);
 
   --zindex-header: 2000;
   --zindex-xhigh: 1000;
