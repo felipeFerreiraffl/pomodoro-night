@@ -1,68 +1,118 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --size-2: 0.125rem;
+  --size-4: 0.25rem;
+  --size-8: 0.5rem;
+  --size-12: 0.75rem;
+  --size-14: 0.875rem;
+  --size-16: 1rem;
+  --size-20: 1.25rem;
+  --size-24: 1.5rem;
+  --size-28: 1.75rem;
+  --size-32: 2rem;
+  --size-36: 2.25rem;
+  --size-40: 2.5rem;
+  --size-44: 2.75rem;
+  --size-48: 3rem;
+  --size-52: 3.25rem;
+  --size-56: 3.5rem;
+  --size-60: 3.75rem;
+  --size-64: 4rem;
+  --size-68: 4.25rem;
+  --size-72: 4.5rem;
+  --size-76: 4.75rem;
+  --size-80: 5rem;
+  --size-84: 5.25rem;
+  --size-88: 5.5rem;
+  --size-92: 5.75rem;
+  --size-96: 6rem;
+  --size-120: 7.5rem;
+  --size-124: 7.75rem;
+  --size-140: 8.75rem;
+  --size-160: 10rem;
+  --size-200: 12.5rem;
+  --size-240: 15rem;
+  --size-260: 16.25rem;
+  --size-280: 17.5rem;
+  --size-320: 20rem;
+  --size-376: 23.5rem;
+  --size-380: 23.75rem;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --font-family: "DM Sans", sans-serif;
+  --font-title-ttl_h1: 700 var(--size-48) / 1.5 var(--font-family);
+  --font-title-ttl_h2: 700 var(--size-40) / 1.5 var(--font-family);
+  --font-title-ttl_h3: 700 var(--size-36) / 1.5 var(--font-family);
+  --font-body-xlarge_regular: 400 var(--size-24) / 1.5 var(--font-family);
+  --font-body-xlarge_bold: 700 var(--size-24) / 1.5 var(--font-family);
+  --font-body-large_regular: 400 var(--size-20) / 1.5 var(--font-family);
+  --font-body-large_bold: 700 var(--size-20) / 1.5 var(--font-family);
+  --font-body-medium_regular: 400 var(--size-16) / 1.5 var(--font-family);
+  --font-body-medium_bold: 700 var(--size-16) / 1.5 var(--font-family);
+  --font-body-small_regular: 400 var(--size-14) / 1.5 var(--font-family);
+  --font-body-small_bold: 700 var(--size-14) / 1.5 var(--font-family);
+  --font-body-xsmall_regular: 400 var(--size-12) / 1.5 var(--font-family);
+  --font-body-xsmall_bold: 700 var(--size-12) / 1.5 var(--font-family);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-primary: 70 130 218;
+  --color-title: 170 188 217;
+  --color-red: 221 59 59;
+  --color-yellow: 221 216 59;
+  --color-green: 73 221 59;
+  --color-white: 239 239 239;
+  --color-black: 15 15 15;
+
+  --zindex-header: 2000;
+  --zindex-xhigh: 1000;
+  --zindex-high: 100;
+  --zindex-medium: 50;
+  --zindex-low: 10;
+  --zindex-background: 1;
+  --zindex-before: -1;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+[data-theme="cyberpunk"] {
+  --color-primary: 227 85 161;
+  --color-title: 223 172 227;
+  --color-red: 216 78 91;
+  --color-yellow: 221 183 59;
+  --color-green: 59 221 118;
+  --color-white: 234 249 249;
+  --color-black: 14 18 22;
 }
-a:hover {
-  color: #535bf2;
+
+[data-theme="forest"] {
+  --color-primary: 89 165 72;
+  --color-title: 172 224 199;
+  --color-red: 208 93 76;
+  --color-yellow: 209 224 92;
+  --color-green: 86 201 82;
+  --color-white: 229 247 235;
+  --color-black: 11 17 12;
+}
+
+[data-theme="desert"] {
+  --color-primary: 194 123 68;
+  --color-title: 218 204 154;
+  --color-red: 214 92 62;
+  --color-yellow: 215 175 75;
+  --color-green: 118 186 63;
+  --color-white: 243 244 214;
+  --color-black: 11 11 15;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  background: none;
+  list-style: none;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  width: 100vw;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  overflow-x: hidden;
+  background-color: rgb(var(--color-black));
 }
