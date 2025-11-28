@@ -18,7 +18,7 @@ export default defineConfig({
         replaceAttrValues: {
           "#4682DA": "{props.primaryColor}",
           "#EFEFEF": "{props.whiteColor}",
-          "#DDD83B": "{props.starsColor}",
+          "#DDD83B": "{props.yellowColor}",
         },
         svgo: true,
         svgoConfig: {
