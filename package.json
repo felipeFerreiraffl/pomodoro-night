@@ -16,13 +16,11 @@
     "react-dom": "^19.2.0",
     "react-hot-toast": "^2.6.0",
     "react-router": "^7.9.6",
-    "svgo": "^4.0.0",
-    "vite-plugin-svgr": "^4.5.0"
+    "svgo": "^4.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@svgr/plugin-jsx": "^8.1.0",
-    "@svgr/plugin-svgo": "^8.1.0",
+    "@svgr/rollup": "^8.1.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
