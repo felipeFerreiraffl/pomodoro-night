@@ -5,7 +5,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["vite/client"],
+    "types": ["vite/client", "vite-plugin-svgr/client"],
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -32,6 +32,6 @@
       "@hooks/*": ["src/hooks/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "src/types/svgr.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
