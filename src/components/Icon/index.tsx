@@ -5,7 +5,7 @@ interface IconProps extends Omit<ComponentProps<PhosphorIcon>, "ref"> {
   icon: PhosphorIcon;
   size?: number;
   weight?: "thin" | "light" | "regular" | "bold" | "fill" | "duotone";
-  className: string;
+  className?: string;
 }
 
 export default function Icon({
