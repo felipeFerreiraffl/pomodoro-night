@@ -66,6 +66,12 @@
   --border-opacity: var(--size-2) solid rgb(var(--color-primary) / 0.2);
   --border-dashed: var(--size-2) dashed rgb(var(--color-title));
 
+  --radius-8: var(--size-8);
+  --radius-12: var(--size-12);
+  --radius-20: var(--size-20);
+  --radius-32: var(--size-32);
+  --radius-circular: 50%;
+
   --shadow-text: 0 0 var(--size-8) rgb(var(--color-primary) / 0.5);
   --shadow-btn: 0 0 var(--size-16) rgb(var(--color-primary) / 0.5);
   --shadow-task: 0 0 var(--size-28) rgb(var(--color-primary) / 0.5);
