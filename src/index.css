@@ -76,6 +76,8 @@
   --zindex-low: 10;
   --zindex-background: 1;
   --zindex-before: -1;
+
+  --transition-def: 0.3s ease-in-out;
 }
 
 [data-theme="cyberpunk"] {
