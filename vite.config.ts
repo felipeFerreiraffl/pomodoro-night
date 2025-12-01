@@ -28,9 +28,9 @@ export default defineConfig({
 
         // Torna os valores das cores variáveis
         replaceAttrValues: {
-          "#4682DA": "currentColor",
-          "#EFEFEF": "currentColor",
-          "#DDD83B": "currentColor",
+          "#4682DA": "rgb(var(--color-primary))",
+          "#EFEFEF": "rgb(var(--color-white))",
+          "#DDD83B": "rgb(var(--color-yellow))",
         },
       },
     }),
