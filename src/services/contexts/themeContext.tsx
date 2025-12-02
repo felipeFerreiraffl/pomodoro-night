@@ -33,8 +33,8 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(theme);
+  const toggleTheme = (color: Theme) => {
+    setTheme(color);
   };
 
   console.log(`Tema da aplicação: ${theme}`);
