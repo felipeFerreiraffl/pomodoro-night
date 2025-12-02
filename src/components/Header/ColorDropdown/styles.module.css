@@ -1,8 +1,11 @@
 .container {
+  position: absolute;
+  top: var(--size-36);
+  left: calc(var(--size-164) * -1);
   display: flex;
   flex-direction: column;
   align-items: start;
-  max-width: var(--size-200);
+  min-width: var(--size-200);
   width: 100%;
   gap: var(--size-8);
   border: var(--border-thin);
