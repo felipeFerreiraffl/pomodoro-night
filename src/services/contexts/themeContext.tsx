@@ -37,8 +37,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setTheme(color);
   };
 
-  console.log(`Tema da aplicação: ${theme}`);
-
   const value = { theme, toggleTheme };
 
   return (
