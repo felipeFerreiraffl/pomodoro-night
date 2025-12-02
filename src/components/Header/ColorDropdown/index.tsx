@@ -1,6 +1,6 @@
 import { useTheme } from "@services/contexts/themeContext";
+import { useEffect, useRef } from "react";
 import styles from "./styles.module.css";
-import { setStateToFalse } from "@/utils/setState";
 
 interface ColorDropdownProps {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,13 +8,29 @@ interface ColorDropdownProps {
 
 export default function ColorDropdown({ setState }: ColorDropdownProps) {
   const { theme, toggleTheme } = useTheme();
+  const menuRef = useRef<HTMLUListElement>(null); // Identificação de menu por DOM
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      // Verifica se houve um clique fora do elemento
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setState(false);
+      }
+    };
+
+    // Delay para evitar um clique que feche o elemento insperadamente
+    const timeoutId = setTimeout(() => {
+      document.addEventListener("mousedown", handleClickOutside);
+    }, 0);
+
+    return () => {
+      clearTimeout(timeoutId);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setState]);
 
   return (
-    <ul
-      role="menu"
-      className={styles.container}
-      onBlur={setStateToFalse(setState)}
-    >
+    <ul ref={menuRef} role="menu" className={styles.container}>
       <li
         role="none"
         className={`${styles.item} ${styles.default} ${
