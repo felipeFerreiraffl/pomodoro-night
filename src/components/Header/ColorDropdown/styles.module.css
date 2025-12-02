@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  max-width: var(--size-200);
+  width: 100%;
+  gap: var(--size-8);
+  border: var(--border-thin);
+  background-color: rgb(var(--color-black));
+  padding: var(--size-12);
+  border-radius: var(--radius-20);
+}
+
+.item {
+  width: 100%;
+  border-radius: var(--radius-12);
+  padding: var(--size-8) var(--size-12);
+  transition: var(--transition-def);
+}
+
+.card {
+  width: 100%;
+  text-align: start;
+  font: var(--font-body-medium_bold);
+  color: rgb(var(--color-white));
+}
+
+.default {
+  background-color: rgb(70 130 218 / 0.2);
+}
+
+.default:hover {
+  background-color: rgb(70 130 218);
+}
+
+.cyberpunk {
+  background-color: rgb(227 85 161 / 0.2);
+}
+
+.cyberpunk:hover {
+  background-color: rgb(227 85 161);
+}
+
+.florest {
+  background-color: rgb(89 165 72 / 0.2);
+}
+
+.florest:hover {
+  background-color: rgb(89 165 72);
+}
+
+.desert {
+  background-color: rgb(194 123 68 / 0.2);
+}
+
+.desert:hover {
+  background-color: rgb(194 123 68);
+}
