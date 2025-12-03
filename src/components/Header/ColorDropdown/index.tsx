@@ -17,7 +17,7 @@ export default function ColorDropdown({ state, setState }: ColorDropdownProps) {
       gsap.fromTo(
         menuRef.current,
         { scale: 0, transformOrigin: "top right" },
-        { scale: 1, duration: 0.3, ease: "power1.inOut" }
+        { scale: 1, duration: 0.3, ease: "power2.out" }
       );
     }
   }, [state]);
@@ -32,7 +32,7 @@ export default function ColorDropdown({ state, setState }: ColorDropdownProps) {
           {
             scale: 0,
             duration: 0.3,
-            ease: "power1.inOut",
+            ease: "power2.in",
             onComplete: () => setState(false),
           }
         );
