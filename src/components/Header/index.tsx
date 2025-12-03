@@ -60,7 +60,9 @@ export default function Header() {
             <Icon icon={icons.common.palette} size={16} weight="fill" />
           </button>
 
-          {openColorMenu && <ColorDropdown setState={setOpenColorMenu} />}
+          {openColorMenu && (
+            <ColorDropdown state={openColorMenu} setState={setOpenColorMenu} />
+          )}
         </div>
         <button className={styles.function}>
           <Icon icon={icons.common.music_notes} size={16} weight="fill" />

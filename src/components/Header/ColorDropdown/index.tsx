@@ -1,20 +1,41 @@
 import { useTheme } from "@services/contexts/themeContext";
-import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import React, { useEffect, useRef } from "react";
 import styles from "./styles.module.css";
 
 interface ColorDropdownProps {
+  state: boolean;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ColorDropdown({ setState }: ColorDropdownProps) {
+export default function ColorDropdown({ state, setState }: ColorDropdownProps) {
   const { theme, toggleTheme } = useTheme();
-  const menuRef = useRef<HTMLUListElement>(null); // Identificação de menu por DOM
+  const menuRef = useRef<HTMLUListElement | null>(null); // Identificação de menu por DOM
+
+  useEffect(() => {
+    if (state && menuRef.current) {
+      gsap.fromTo(
+        menuRef.current,
+        { scale: 0, transformOrigin: "top right" },
+        { scale: 1, duration: 0.3, ease: "power1.inOut" }
+      );
+    }
+  }, [state]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       // Verifica se houve um clique fora do elemento
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setState(false);
+        gsap.fromTo(
+          menuRef.current,
+          { scale: 1, transformOrigin: "top right" },
+          {
+            scale: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+            onComplete: () => setState(false),
+          }
+        );
       }
     };
 
@@ -27,7 +48,7 @@ export default function ColorDropdown({ setState }: ColorDropdownProps) {
       clearTimeout(timeoutId);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [setState]);
+  }, [state, setState]);
 
   return (
     <ul ref={menuRef} role="menu" className={styles.container}>
