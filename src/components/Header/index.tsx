@@ -12,8 +12,8 @@ export default function Header() {
 
   return (
     <header className={styles.container}>
-      <NavLink to={"/"}>
-        <PomodoroLogo className={styles.logo} />
+      <NavLink to={"/"} className={styles.logo}>
+        <PomodoroLogo />
       </NavLink>
 
       <nav>

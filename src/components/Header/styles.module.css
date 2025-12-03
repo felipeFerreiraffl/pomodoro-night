@@ -12,6 +12,7 @@
 
 .logo {
   cursor: pointer;
+  display: flex;
 }
 
 .navigation {
