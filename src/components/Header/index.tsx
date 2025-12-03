@@ -12,12 +12,14 @@ export default function Header() {
 
   return (
     <header className={styles.container}>
-      <PomodoroLogo className={styles.logo} />
+      <NavLink to={"/"}>
+        <PomodoroLogo className={styles.logo} />
+      </NavLink>
 
       <nav>
         <ul className={styles.navigation}>
           <li>
-            <NavLink to={"#"} className={styles.page}>
+            <NavLink to={"/stats"} className={styles.page}>
               <Icon
                 icon={icons.common.chart_bar}
                 className={styles.pageIcon}
@@ -27,7 +29,7 @@ export default function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"#"} className={styles.page}>
+            <NavLink to={"/settings"} className={styles.page}>
               <Icon
                 icon={icons.common.gear}
                 className={styles.pageIcon}
@@ -37,7 +39,7 @@ export default function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"#"} className={styles.page}>
+            <NavLink to={"/about"} className={styles.page}>
               <Icon
                 icon={icons.common.info}
                 className={styles.pageIcon}
