@@ -31,14 +31,14 @@ export default function PomodoroLogo({
 
     const handleMouseEnter = () => {
       gsap.to(moon, {
-        rotate: -10,
+        rotate: -15,
         transformOrigin: "center center",
         duration: 0.3,
         ease: "power1.out",
       });
 
       gsap.to(stars, {
-        scale: 1.5,
+        scale: 2,
         transformOrigin: "center center",
         duration: 0.3,
         ease: "power1.out",
