@@ -1,10 +1,15 @@
 import { icons } from "@/utils/icons";
+import { setStateToTrue } from "@/utils/setState";
 import Logo from "@assets/svgs/pomodoro-night.svg?react";
+import { useState } from "react";
 import { NavLink } from "react-router";
 import Icon from "../Icon";
+import ColorDropdown from "./ColorDropdown";
 import styles from "./styles.module.css";
 
 export default function Header() {
+  const [openColorMenu, setOpenColorMenu] = useState<boolean>(false);
+
   return (
     <header className={styles.container}>
       <Logo className={styles.logo} width={40} height={40} />
@@ -45,9 +50,18 @@ export default function Header() {
       </nav>
 
       <div className={styles.functionsContainer}>
-        <button className={styles.function}>
-          <Icon icon={icons.common.palette} size={16} weight="fill" />
-        </button>
+        <div className={styles.colorContainer}>
+          <button
+            role="button"
+            aria-label="color"
+            className={styles.function}
+            onClick={setStateToTrue(setOpenColorMenu)}
+          >
+            <Icon icon={icons.common.palette} size={16} weight="fill" />
+          </button>
+
+          {openColorMenu && <ColorDropdown setState={setOpenColorMenu} />}
+        </div>
         <button className={styles.function}>
           <Icon icon={icons.common.music_notes} size={16} weight="fill" />
         </button>
