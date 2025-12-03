@@ -1,10 +1,10 @@
 import { icons } from "@/utils/icons";
 import { setStateToTrue } from "@/utils/setState";
-import Logo from "@assets/svgs/pomodoro-night.svg?react";
 import { useState } from "react";
 import { NavLink } from "react-router";
 import Icon from "../Icon";
 import ColorDropdown from "./ColorDropdown";
+import PomodoroLogo from "./PomodoroLogo";
 import styles from "./styles.module.css";
 
 export default function Header() {
@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header className={styles.container}>
-      <Logo className={styles.logo} width={40} height={40} />
+      <PomodoroLogo className={styles.logo} />
 
       <nav>
         <ul className={styles.navigation}>
