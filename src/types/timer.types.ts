@@ -1,6 +1,6 @@
 // Enums para status e fases do pomodoro
 export type TimerStatus = "IDLE" | "RUNNING" | "PAUSED";
-export type TimerPhase = "POMODORO" | "BREAK" | "LONG_BREAK";
+export type TimerPhase = "POMODORO" | "SHORT_BREAK" | "LONG_BREAK";
 
 // Tipagem para timer global
 export interface TimerContextType {
@@ -10,8 +10,6 @@ export interface TimerContextType {
   pomodoroCount: number;
   progress: number;
   formattedTime: string;
-  startedAt?: number;
-  pausedAt?: number;
 
   // Funções para os botões
   startTimer: () => void;
