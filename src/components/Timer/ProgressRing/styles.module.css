@@ -1,0 +1,7 @@
+.progressRing {
+  transform: rotate(-90deg);
+}
+
+.progressRingCircle {
+  transition: stroke-dashoffset var(--transition-def);
+}
