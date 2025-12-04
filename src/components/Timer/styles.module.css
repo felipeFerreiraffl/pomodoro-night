@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-20);
+}
+
+.timerContainer {
+  position: relative;
+}
+
+.timerDisplay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-4);
+}
+
+.timerLabel {
+  font: var(--font-body-large_regular);
+  color: rgb(var(--color-white));
+}
+
+.timerTime {
+  font: var(--font-title-ttl_h1);
+  color: rgb(var(--color-title));
+}
+
+.buttonsContainer {
+}
+
+.button {
+}
