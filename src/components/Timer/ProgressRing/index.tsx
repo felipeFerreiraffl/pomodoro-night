@@ -13,7 +13,7 @@ export default function ProgressRing({
   strokeWidth = 2,
   color = "rgb(var(--color-primary))",
 }: ProgressRingProps) {
-  const radius = size / strokeWidth / 2;
+  const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 
   // Progresso baseado no offset (0 = 100%)
@@ -26,7 +26,7 @@ export default function ProgressRing({
         cy={size / 2}
         r={radius}
         fill="none"
-        stroke="rgb(var(--color-black))"
+        stroke={color}
         strokeWidth={strokeWidth}
       />
       <circle
@@ -35,7 +35,7 @@ export default function ProgressRing({
         cy={size / 2}
         r={radius}
         fill="none"
-        stroke={color}
+        stroke="rgb(var(--color-black))"
         strokeWidth={strokeWidth}
         strokeDasharray={circumference}
         strokeDashoffset={offset}
