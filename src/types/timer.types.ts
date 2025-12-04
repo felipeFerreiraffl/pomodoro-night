@@ -10,6 +10,8 @@ export interface TimerContextType {
   pomodoroCount: number;
   progress: number;
   formattedTime: string;
+  startedAt?: number;
+  pausedAt?: number;
 
   // Funções para os botões
   startTimer: () => void;
