@@ -32,7 +32,24 @@
 }
 
 .buttonsContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--size-20);
 }
 
 .button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-60);
+  aspect-ratio: 1 / 1;
+  color: rgb(var(--color-white));
+  background-color: rgb(var(--color-primary) / 0.5);
+  border-radius: var(--radius-12);
+  transition: background-color var(--transition-def);
+}
+
+.button:hover {
+  background-color: rgb(var(--color-primary));
 }
