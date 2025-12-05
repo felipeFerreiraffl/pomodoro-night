@@ -17,3 +17,15 @@ export interface TimerContextType {
   skipTimer: () => void;
   resetTimer: () => void;
 }
+
+export interface TimerState {
+  timeLeft: number;
+  totalTime: number;
+  status: TimerStatus;
+  phase: TimerPhase;
+  pomodoroCount: number;
+  startedAt: number | null;
+  pausedAt: number | null;
+  lastUpdated: number;
+  date: string;
+}
