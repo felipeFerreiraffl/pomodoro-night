@@ -9,8 +9,9 @@
   min-height: var(--size-80);
   gap: var(--size-80);
   padding: var(--size-24) 0;
-  background-color: var(--color-black);
+  background-color: rgb(var(--color-black));
   border-bottom: var(--border-opacity);
+  z-index: var(--zindex-header);
 }
 
 .logo {
