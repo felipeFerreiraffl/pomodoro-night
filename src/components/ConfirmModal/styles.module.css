@@ -1,0 +1,51 @@
+.overlay {
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-20);
+  width: min(var(--size-380), 26vw);
+  padding: var(--size-20) 0;
+  border: var(--border-normal);
+  border-radius: var(--radius-12);
+}
+
+.message {
+  font: var(--font-body-large_bold);
+  color: rgb(var(--color-white));
+  text-align: center;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--size-12);
+}
+
+.button {
+  cursor: pointer;
+  min-width: var(--size-120);
+  padding: var(--size-12);
+  border-radius: var(--size-12);
+  font: var(--font-body-medium_bold);
+  color: rgb(var(--color-white));
+  transition: var(--transition-def);
+}
+
+.confirm {
+  background-color: rgb(var(--color-green) / 0.5);
+}
+
+.confirm:hover {
+  background-color: rgb(var(--color-green));
+}
+
+.cancel {
+  background-color: rgb(var(--color-red) / 0.5);
+}
+
+.cancel:hover {
+  background-color: rgb(var(--color-red));
+}
