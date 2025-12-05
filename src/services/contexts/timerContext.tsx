@@ -1,6 +1,7 @@
 import type {
   TimerContextType,
   TimerPhase,
+  TimerState,
   TimerStatus,
 } from "@/types/timer.types";
 import {
@@ -21,16 +22,88 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   const LONG_BREAK_TIME = 15 * 60;
   const POMODOROS_FOR_LONG_BREAK = 4;
 
-  const [timeLeft, setTimeLeft] = useState<number>(WORK_TIME);
-  const [status, setStatus] = useState<TimerStatus>("IDLE");
-  const [phase, setPhase] = useState<TimerPhase>("POMODORO");
-  const [pomodoroCount, setPomodoroCount] = useState<number>(0);
+  // Código antes para utilizar depois
+  const loadTimerState = (): TimerState | null => {
+    const savedState = localStorage.getItem("pomodoroTimer");
+
+    if (!savedState) {
+      console.log(`Nenhum timer salvo foi encontrado`);
+      return null;
+    }
+
+    try {
+      const state: TimerState = JSON.parse(savedState);
+
+      // Valida se é no mesmo dia
+      const today = new Date().toISOString().split("T")[0];
+      if (state.date !== today) {
+        console.log("Timer é de outro dia. Resetando contador...");
+        return null; // Reseta o timer
+      }
+
+      // Calcula tempo passado se estiver rodando
+      if (state.status === "RUNNING" && state.startedAt) {
+        const now = Date.now();
+        const elapsedMs = now - state.startedAt;
+        const elapsedSeconds = Math.floor(elapsedMs / 1000);
+
+        state.timeLeft = Math.max(0, state.timeLeft - elapsedSeconds);
+
+        console.log(`
+          • Timer estava rodando. Passaram-se ${elapsedSeconds}s
+          • Tempo restante atualizado: ${state.timeLeft}s
+        `);
+
+        if (state.timeLeft === 0) {
+          console.log("Timer acabou. Resetando timer");
+          return null;
+        }
+      }
+
+      return state;
+    } catch (error) {
+      console.error(`Erro ao carregar timer salvo: ${error}`);
+      return null;
+    }
+  };
+
+  const initialState = loadTimerState();
+
+  const [timeLeft, setTimeLeft] = useState<number>(
+    initialState?.timeLeft ?? WORK_TIME
+  );
+  const [status, setStatus] = useState<TimerStatus>(
+    initialState?.status ?? "IDLE"
+  );
+  const [phase, setPhase] = useState<TimerPhase>(
+    initialState?.phase ?? "POMODORO"
+  );
+  const [pomodoroCount, setPomodoroCount] = useState<number>(
+    initialState?.pomodoroCount ?? 0
+  );
 
   const timerRef = useRef<number | null>(null);
 
   // Refs para drift do timeout
   const startTimeRef = useRef<number | null>(null);
   const expectedTimeRef = useRef<number | null>(null);
+
+  // Salva o timer para o localStorage
+  const saveTimerState = () => {
+    const state: TimerState = {
+      timeLeft,
+      totalTime: getTotalTime(),
+      status,
+      phase,
+      pomodoroCount,
+      startedAt: startTimeRef.current,
+      pausedAt: status === "PAUSED" ? Date.now() : null,
+      lastUpdated: Date.now(),
+      date: new Date().toISOString().split("T")[0],
+    };
+
+    localStorage.setItem("pomodoroTimer", JSON.stringify(state));
+  };
 
   const clearTimer = () => {
     if (timerRef.current) {
@@ -62,6 +135,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
 
   const handleTimerCompleted = () => {
     setStatus("IDLE");
+    saveTimerState();
 
     if (phase === "POMODORO") {
       const cycleCount = pomodoroCount + 1;
@@ -79,6 +153,8 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
       setPhase("POMODORO");
       setTimeLeft(WORK_TIME);
     }
+
+    saveTimerState();
 
     // Adicionar notificação e autostart depois
   };
@@ -124,11 +200,13 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
     clearTimer();
     setStatus("PAUSED");
     startTimeRef.current = null; // Altera o início do timer
+    saveTimerState();
   };
 
   const skipTimer = () => {
     clearTimer();
     handleTimerCompleted();
+    saveTimerState();
   };
 
   const resetTimer = () => {
@@ -141,6 +219,27 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     return () => clearTimer();
   }, []);
+
+  useEffect(() => {
+    if (initialState?.status === "RUNNING") {
+      console.log("Timer rodando, reiniciando");
+      // startTimer();
+      pauseTimer();
+      saveTimerState();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (status === "RUNNING") {
+      const saveInterval = setInterval(() => {
+        saveTimerState();
+      }, 5000);
+
+      return () => clearInterval(saveInterval);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, timeLeft, phase, pomodoroCount]);
 
   const value: TimerContextType = {
     timeLeft,
