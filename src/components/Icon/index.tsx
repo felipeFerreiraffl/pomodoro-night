@@ -10,7 +10,7 @@ interface IconProps extends Omit<ComponentProps<PhosphorIcon>, "ref"> {
 
 export default function Icon({
   icon: IconComponent,
-  size = 24,
+  size,
   weight = "regular",
   className = "",
   ...props
@@ -18,7 +18,7 @@ export default function Icon({
   return (
     <IconComponent
       className={className}
-      size={size}
+      {...(typeof size === "number" && { size })}
       weight={weight}
       {...props}
     />
