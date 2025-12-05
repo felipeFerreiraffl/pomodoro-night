@@ -15,10 +15,22 @@
   gap: var(--size-20);
 }
 
+.navigation {
+  @media (max-width: 488px) {
+    flex-direction: column;
+  }
+}
+
 .page {
   font: var(--font-body-medium_bold);
   color: rgb(var(--color-white));
-  transition: color var(--transition-def), box-shadow var(--transition-def);
+  transition: color var(--transition-def), filter var(--transition-def);
+}
+
+.page:hover,
+.page.active {
+  color: rgb(var(--color-title));
+  filter: drop-shadow(var(--shadow-text));
 }
 
 .social {
@@ -27,7 +39,13 @@
   padding: var(--size-8);
   border-radius: var(--radius-circular);
   color: rgb(var(--color-white));
-  transition: color var(--transition-def), box-shadow var(--transition-def);
+  transition: background-color var(--transition-def),
+    box-shadow var(--transition-def);
+}
+
+.social:hover {
+  background-color: rgb(var(--color-primary));
+  box-shadow: var(--shadow-btn);
 }
 
 .copyright {
