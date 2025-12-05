@@ -6,20 +6,21 @@ import Icon from "../Icon";
 import ColorDropdown from "./ColorDropdown";
 import PomodoroLogo from "./PomodoroLogo";
 import styles from "./styles.module.css";
+import { links } from "@/utils/links";
 
 export default function Header() {
   const [openColorMenu, setOpenColorMenu] = useState<boolean>(false);
 
   return (
     <header className={styles.container}>
-      <NavLink to={"/"} className={styles.logo}>
+      <NavLink to={links.pages.home} className={styles.logo}>
         <PomodoroLogo />
       </NavLink>
 
       <nav>
         <ul className={styles.navigation}>
           <li>
-            <NavLink to={"/stats"} className={styles.page}>
+            <NavLink to={links.pages.stats} className={styles.page}>
               <Icon
                 icon={icons.common.chart_bar}
                 className={styles.pageIcon}
@@ -29,7 +30,7 @@ export default function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/settings"} className={styles.page}>
+            <NavLink to={links.pages.settings} className={styles.page}>
               <Icon
                 icon={icons.common.gear}
                 className={styles.pageIcon}
@@ -39,7 +40,7 @@ export default function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/about"} className={styles.page}>
+            <NavLink to={links.pages.about} className={styles.page}>
               <Icon
                 icon={icons.common.info}
                 className={styles.pageIcon}
