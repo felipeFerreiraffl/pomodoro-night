@@ -32,6 +32,7 @@
   --size-140: 8.75rem;
   --size-160: 10rem;
   --size-164: 10.25rem;
+  --size-184: 11.5rem;
   --size-200: 12.5rem;
   --size-240: 15rem;
   --size-260: 16.25rem;
@@ -139,4 +140,5 @@ body {
   overflow-x: hidden;
   background-color: rgb(var(--color-black));
   transition: var(--transition-theme);
+  margin-top: var(--size-184);
 }
