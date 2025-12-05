@@ -3,6 +3,9 @@ import { icons } from "@/utils/icons";
 import Icon from "../Icon";
 import ProgressRing from "./ProgressRing";
 import styles from "./styles.module.css";
+import { useState } from "react";
+import { setStateToFalse, setStateToTrue } from "@/utils/setState";
+import ConfirmModal from "../ConfirmModal";
 
 export default function Timer() {
   const {
@@ -10,10 +13,18 @@ export default function Timer() {
     pauseTimer,
     phase,
     progress,
+    resetTimer,
     skipTimer,
     startTimer,
     status,
   } = useTimer();
+
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+
+  const handleResetTimer = () => {
+    resetTimer();
+    setShowConfirm(false);
+  };
 
   const playPauseIcon =
     status === "RUNNING" ? icons.function.pause : icons.function.play;
@@ -42,6 +53,16 @@ export default function Timer() {
         >
           <Icon icon={playPauseIcon} size={40} weight="fill" />
         </button>
+        <button
+          className={styles.button}
+          onClick={setStateToTrue(setShowConfirm)}
+        >
+          <Icon
+            icon={icons.function.arrows_clockwise}
+            size={40}
+            weight="fill"
+          />
+        </button>
         <button className={styles.button} onClick={skipTimer}>
           <Icon
             icon={icons.function.arrow_fat_line_right}
@@ -50,6 +71,13 @@ export default function Timer() {
           />
         </button>
       </div>
+
+      <ConfirmModal
+        isOpen={showConfirm}
+        message="Resetar timer?"
+        onConfirm={handleResetTimer}
+        onCancel={setStateToFalse(setShowConfirm)}
+      />
     </div>
   );
 }
