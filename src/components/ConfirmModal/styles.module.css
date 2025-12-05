@@ -1,7 +1,17 @@
 .overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(var(--color-black) / 0.8);
+  transition: background-color var(--transition-def);
 }
 
 .container {
+  position: absolute;
+  top: var(--size-20);
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +20,8 @@
   padding: var(--size-20) 0;
   border: var(--border-normal);
   border-radius: var(--radius-12);
+  background-color: rgb(var(--color-black));
+  z-index: var(--zindex-header);
 }
 
 .message {
@@ -31,7 +43,7 @@
   border-radius: var(--size-12);
   font: var(--font-body-medium_bold);
   color: rgb(var(--color-white));
-  transition: var(--transition-def);
+  transition: background-color var(--transition-def);
 }
 
 .confirm {

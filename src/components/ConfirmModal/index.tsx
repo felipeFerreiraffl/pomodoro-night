@@ -13,7 +13,7 @@ export default function ConfirmModal({
   onConfirm,
   onCancel,
 }: ConfirmModalProps) {
-  //   if (!isOpen) return null;
+  if (!isOpen) return null;
 
   return (
     <div className={styles.overlay}>
