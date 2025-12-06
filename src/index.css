@@ -79,6 +79,7 @@
   --shadow-btn: 0 0 var(--size-16) rgb(var(--color-primary) / 0.5);
   --shadow-task: 0 0 var(--size-28) rgb(var(--color-primary) / 0.5);
 
+  --zindex-modal: 2500;
   --zindex-header: 2000;
   --zindex-xhigh: 1000;
   --zindex-high: 100;
@@ -134,7 +135,12 @@
   box-sizing: border-box;
 }
 
+html {
+  position: relative;
+}
+
 body {
+  /* position: relative; */
   width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
