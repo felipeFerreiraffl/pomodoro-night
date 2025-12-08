@@ -6,6 +6,7 @@
 }
 
 .task {
+  cursor: grab;
   position: relative;
   gap: var(--size-24);
   width: var(--size-376);
@@ -40,6 +41,10 @@
   color: rgb(var(--color-title) / 0.5);
   z-index: var(--zindex-medium);
   transition: color var(--transition-def);
+
+  @media (max-width: 488px) {
+    font-size: var(--size-20);
+  }
 }
 
 .finishButton:hover {
@@ -55,6 +60,10 @@
 .title {
   width: 100%;
   font: var(--font-body-large_bold);
+
+  @media (max-width: 488px) {
+    font: var(--font-body-medium_bold);
+  }
 }
 
 .description {
@@ -76,6 +85,10 @@
 .caption {
   font: var(--font-body-small_regular);
   color: rgb(var(--color-title));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-xsmall_regular);
+  }
 }
 
 .functionsContainer {
@@ -96,6 +109,10 @@
   font-size: var(--size-24);
   color: rgb(var(--color-white));
   transition: color var(--transition-def);
+
+  @media (max-width: 488px) {
+    font-size: var(--size-16);
+  }
 }
 
 .edit:hover {
