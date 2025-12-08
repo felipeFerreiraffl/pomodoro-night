@@ -2,10 +2,20 @@ import { icons } from "@/utils/icons";
 import Icon from "../Icon";
 import styles from "./styles.module.css";
 
+interface TaskProps {
+  title: string;
+  description?: string;
+  pomodoros: number;
+  completed?: boolean;
+}
+
 export default function Task() {
   return (
     <div className={styles.task}>
-      <button className={styles.finishButton}>
+      <button
+        className={`${styles.finishButton} tooltip-absolute`}
+        data-tooltip="Definir como finalizada"
+      >
         <Icon icon={icons.common.check_circle} weight="fill" />
       </button>
 

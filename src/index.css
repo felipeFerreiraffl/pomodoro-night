@@ -183,3 +183,36 @@ body::-webkit-scrollbar-button:vertical:decrement {
 body::-webkit-scrollbar-button:vertical:increment {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><path d="M215.39,92.94A8,8,0,0,0,208,88H48a8,8,0,0,0-5.66,13.66l80,80a8,8,0,0,0,11.32,0l80-80A8,8,0,0,0,215.39,92.94Z"/></svg>');
 }
+
+/* Tooltips personalizados */
+
+[data-tooltip] {
+  position: relative;
+  display: inline-block;
+}
+
+[data-tooltip].tooltip-absolute {
+  position: absolute;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + var(--size-4));
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgb(var(--color-black));
+  color: rgb(var(--color-white));
+  border-radius: var(--radius-12);
+  white-space: nowrap;
+  font: var(--font-body-small_bold);
+  padding: var(--size-8) var(--size-12);
+  box-shadow: var(--shadow-text);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-def);
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+}
