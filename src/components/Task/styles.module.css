@@ -13,6 +13,19 @@
   background-color: rgb(var(--color-black));
   border: var(--border-normal);
   border-radius: var(--radius-12);
+  transition: box-shadow var(--transition-def);
+
+  @media (max-width: 884px) {
+    width: var(--size-320);
+  }
+
+  @media (max-width: 488px) {
+    width: var(--size-280);
+  }
+}
+
+.task:hover {
+  box-shadow: var(--shadow-task);
 }
 
 .finishButton {
@@ -34,17 +47,30 @@
 }
 
 .mainContainer {
+  width: 100%;
   gap: var(--size-4);
   color: rgb(var(--color-white));
 }
 
 .title {
+  width: 100%;
   font: var(--font-body-large_bold);
 }
 
 .description {
+  width: 100%;
   font: var(--font-body-xsmall_regular);
   opacity: 0.5;
+}
+
+.title,
+.description {
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .caption {
