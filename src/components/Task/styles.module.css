@@ -1,0 +1,59 @@
+.task,
+.mainContainer {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+
+.task {
+  position: relative;
+  gap: var(--size-24);
+  width: var(--size-376);
+  padding: var(--size-12) var(--size-20);
+  background-color: rgb(var(--color-black));
+  border: var(--border-normal);
+  border-radius: var(--radius-12);
+}
+
+.mainContainer {
+  gap: var(--size-4);
+  color: rgb(var(--color-white));
+}
+
+.title {
+  font: var(--font-body-large_bold);
+}
+
+.description {
+  font: var(--font-body-xsmall_regular);
+  opacity: 0.5;
+}
+
+.caption {
+  font: var(--font-body-small_regular);
+  color: rgb(var(--color-title));
+}
+
+.functionsContainer {
+  position: absolute;
+  bottom: var(--size-8);
+  right: var(--size-8);
+  display: flex;
+  align-items: center;
+  gap: var(--size-8);
+  color: rgb(var(--color-white));
+}
+
+.function {
+  cursor: pointer;
+  font-size: var(--size-24);
+  transition: color var(--transition-def);
+}
+
+.edit:hover {
+  color: rgb(var(--color-green));
+}
+
+.delete:hover {
+  color: rgb(var(--color-red));
+}
