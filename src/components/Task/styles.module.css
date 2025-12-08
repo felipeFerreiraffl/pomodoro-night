@@ -15,6 +15,24 @@
   border-radius: var(--radius-12);
 }
 
+.finishButton {
+  position: absolute;
+  top: calc(var(--size-8) * -1);
+  left: calc(var(--size-8) * -1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--size-24);
+  color: rgb(var(--color-title) / 0.5);
+  z-index: var(--zindex-medium);
+  transition: color var(--transition-def);
+}
+
+.finishButton:hover {
+  color: rgb(var(--color-title));
+}
+
 .mainContainer {
   gap: var(--size-4);
   color: rgb(var(--color-white));
@@ -46,7 +64,11 @@
 
 .function {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: var(--size-24);
+  color: rgb(var(--color-white));
   transition: color var(--transition-def);
 }
 
@@ -56,4 +78,14 @@
 
 .delete:hover {
   color: rgb(var(--color-red));
+}
+
+.priority {
+  position: absolute;
+  top: var(--size-8);
+  right: var(--size-8);
+  width: var(--size-12);
+  aspect-ratio: 1;
+  background-color: rgb(var(--color-green));
+  border-radius: var(--radius-circular);
 }
