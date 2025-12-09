@@ -213,6 +213,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
     clearTimer();
     setStatus("IDLE");
     setTimeLeft(getTotalTime()); // Gera um novo tempo baseado no período que está
+    saveTimerState();
   };
 
   // Limpa o timer ao desmontar
