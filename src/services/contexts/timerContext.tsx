@@ -27,7 +27,6 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
     const savedState = localStorage.getItem("pomodoroTimer");
 
     if (!savedState) {
-      console.log(`Nenhum timer salvo foi encontrado`);
       return null;
     }
 
@@ -37,7 +36,6 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
       // Valida se é no mesmo dia
       const today = new Date().toISOString().split("T")[0];
       if (state.date !== today) {
-        console.log("Timer é de outro dia. Resetando contador...");
         return null; // Reseta o timer
       }
 
@@ -49,19 +47,13 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
 
         state.timeLeft = Math.max(0, state.timeLeft - elapsedSeconds);
 
-        console.log(`
-          • Timer estava rodando. Passaram-se ${elapsedSeconds}s
-          • Tempo restante atualizado: ${state.timeLeft}s
-        `);
-
         if (state.timeLeft === 0) {
-          console.log("Timer acabou. Resetando timer");
           return null;
         }
       }
 
       return state;
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(`Erro ao carregar timer salvo: ${error}`);
       return null;
     }
@@ -223,8 +215,6 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (initialState?.status === "RUNNING") {
-      console.log("Timer rodando, reiniciando");
-      // startTimer();
       pauseTimer();
       saveTimerState();
     }
