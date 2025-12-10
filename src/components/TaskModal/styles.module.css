@@ -1,47 +1,128 @@
 .modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-40);
+  width: min(38.75rem, 43vw);
+  background-color: rgb(var(--color-black));
+  border: var(--border-normal);
+  border-radius: var(--radius-20);
+  padding: var(--size-40);
 }
 
 .title {
+  font: var(--font-title-ttl_h2);
+  color: rgb(var(--color-title));
 }
 
 .modalContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-40);
 }
 
 .field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--size-8);
 }
 
 .label {
+  font: var(--font-body-xlarge_bold);
+  color: rgb(var(--color-white));
+}
+
+.input,
+.pomodoroInput {
+  background-color: rgb(var(--color-white));
+  font: var(--font-body-medium_regular);
+  color: rgb(var(--color-black));
+  padding: var(--size-20);
+  border-radius: var(--radius-20);
 }
 
 .input {
+  width: min(33.75rem, 100%);
 }
 
 .otherFieldContainer {
+  display: flex;
+  align-items: start;
+  gap: var(--size-40);
 }
 
 .priorityContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--size-12);
 }
 
 .otherTitle {
+  font: var(--font-body-large_bold);
+  color: rgb(var(--color-white));
 }
 
 .priorityOptions {
+  display: flex;
+  align-items: center;
+  gap: var(--size-20);
 }
 
 .priority {
+  cursor: pointer;
+  width: var(--size-52);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-4);
 }
 
 .priorityIndicator {
+  width: var(--size-20);
+  aspect-ratio: 1;
+  border-radius: var(--radius-circular);
+}
+
+.low {
+  background-color: rgb(var(--color-green));
+}
+
+.medium {
+  background-color: rgb(var(--color-yellow));
+}
+
+.high {
+  background-color: rgb(var(--color-red));
 }
 
 .priorityLabel {
+  font: var(--font-body-small_regular);
+  color: rgb(var(--color-white));
 }
 
 .pomodorosContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--size-12);
 }
 
 .pomodoroInput {
+  width: var(--size-96);
 }
 
-.button {
+.pomodoroInput::-webkit-inner-spin-button,
+.pomodoroInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pomodoroInput[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
