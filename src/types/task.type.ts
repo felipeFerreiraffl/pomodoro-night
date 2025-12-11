@@ -16,7 +16,10 @@ export interface Task {
 export type TaskAction =
   | {
       type: "ADD_TASK";
-      payload: Omit<Task, "id" | "createdAt" | "completedPomodoros" | "active">;
+      payload: Omit<
+        Task,
+        "id" | "createdAt" | "completedPomodoros" | "active" | "completed"
+      >;
     }
   | {
       type: "EDIT_TASK";
@@ -50,7 +53,10 @@ export interface TaskContextType {
 
   // Funções
   addTask: (
-    task: Omit<Task, "id" | "createdAt" | "completedPomodoros" | "active">
+    task: Omit<
+      Task,
+      "id" | "createdAt" | "completedPomodoros" | "active" | "completed"
+    >
   ) => void;
   editTask: (id: string, updates: Partial<Task>) => void;
   deleteTask: (id: string) => void;
