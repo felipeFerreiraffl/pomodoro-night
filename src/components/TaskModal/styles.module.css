@@ -24,11 +24,39 @@
   border-radius: var(--radius-20);
   padding: var(--size-40);
   z-index: var(--zindex-modal);
+
+  @media (max-width: 884px) {
+    width: min(38.75rem, 81vw);
+  }
+
+  @media (max-width: 488px) {
+    width: min(var(--size-280), 78vw);
+    padding: var(--size-20);
+  }
+}
+
+.closeIcon {
+  cursor: pointer;
+  position: absolute;
+  top: var(--size-20);
+  right: var(--size-20);
+  font-size: var(--size-32);
+  color: rgb(var(--color-red));
+
+  @media (max-width: 488px) {
+    top: var(--size-8);
+    right: var(--size-8);
+    font-size: var(--size-24);
+  }
 }
 
 .title {
   font: var(--font-title-ttl_h2);
   color: rgb(var(--color-title));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-xlarge_bold);
+  }
 }
 
 .modalContent {
@@ -50,6 +78,10 @@
 .label {
   font: var(--font-body-xlarge_bold);
   color: rgb(var(--color-white));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-large_bold);
+  }
 }
 
 .input,
@@ -60,6 +92,15 @@
   padding: var(--size-20);
   border-radius: var(--radius-20);
   transition: outline var(--transition-def);
+
+  @media (max-width: 488px) {
+    padding: var(--size-12) var(--size-20);
+  }
+}
+
+.input::placeholder,
+.pomodoroInput::placeholder {
+  color: rgb(var(--color-black) / 0.5);
 }
 
 .input:focus,
@@ -75,6 +116,11 @@
   display: flex;
   align-items: start;
   gap: var(--size-40);
+
+  @media (max-width: 488px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .priorityContainer {
@@ -82,11 +128,20 @@
   flex-direction: column;
   align-items: start;
   gap: var(--size-12);
+
+  @media (max-width: 488px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .otherTitle {
   font: var(--font-body-large_bold);
   color: rgb(var(--color-white));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-medium_bold);
+  }
 }
 
 .priorityOptions {
@@ -96,7 +151,6 @@
 }
 
 .priority {
-  cursor: pointer;
   width: var(--size-52);
   display: flex;
   flex-direction: column;
@@ -105,13 +159,14 @@
 }
 
 .priorityIndicator {
+  cursor: pointer;
   width: var(--size-20);
   aspect-ratio: 1;
   border-radius: var(--radius-circular);
   transition: outline var(--transition-def), box-shadow var(--transition-def);
 }
 
-.priority:hover .priorityIndicator,
+.priorityIndicator:hover,
 .priorityIndicator.active {
   outline: var(--border-thin);
   box-shadow: var(--shadow-btn);
@@ -139,10 +194,18 @@
   flex-direction: column;
   align-items: start;
   gap: var(--size-12);
+
+  @media (max-width: 488px) {
+    align-items: center;
+  }
 }
 
 .pomodoroInput {
   width: var(--size-96);
+
+  @media (max-width: 488px) {
+    width: var(--size-52);
+  }
 }
 
 .pomodoroInput::-webkit-inner-spin-button,
