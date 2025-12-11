@@ -129,6 +129,17 @@
   right: var(--size-8);
   width: var(--size-12);
   aspect-ratio: 1;
-  background-color: rgb(var(--color-green));
   border-radius: var(--radius-circular);
+}
+
+.priority.low {
+  background-color: rgb(var(--color-green));
+}
+
+.medium {
+  background-color: rgb(var(--color-yellow));
+}
+
+.high {
+  background-color: rgb(var(--color-red));
 }

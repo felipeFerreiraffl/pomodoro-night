@@ -7,6 +7,7 @@ import { useState } from "react";
 import ConfirmModal from "../ConfirmModal";
 import Icon from "../Icon";
 import styles from "./styles.module.css";
+import TaskModal from "../TaskModal";
 
 interface TaskProps {
   task: TaskType;
@@ -15,7 +16,9 @@ interface TaskProps {
 export default function Task({ task }: TaskProps) {
   const { deleteTask, completeTask, setActiveTask } = useTasks();
   const { startTimer, status } = useTimer();
+
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
+  const [taskModal, setTaskModal] = useState<boolean>(false);
 
   const handleSelectTask = () => {
     setActiveTask(task.id);
@@ -35,6 +38,13 @@ export default function Task({ task }: TaskProps) {
   };
 
   const pomodoroCountText = `${task.completedPomodoros}/${task.estimatedPomodoros}`;
+
+  const handlePriorityColor =
+    task?.priority === "low"
+      ? styles.low
+      : task?.priority === "medium"
+      ? styles.medium
+      : styles.high;
 
   return (
     <>
@@ -58,7 +68,13 @@ export default function Task({ task }: TaskProps) {
         <span className={styles.caption}>{pomodoroCountText} pomodoros</span>
 
         <div className={styles.functionsContainer}>
-          <button className={`${styles.function} ${styles.edit}`}>
+          <button
+            className={`${styles.function} ${styles.edit}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setTaskModal(true);
+            }}
+          >
             <Icon icon={icons.function.pencil_simple} weight="regular" />
           </button>
           <button
@@ -72,8 +88,15 @@ export default function Task({ task }: TaskProps) {
           </button>
         </div>
 
-        <div className={styles.priority}></div>
+        <div className={`${styles.priority} ${handlePriorityColor}`}></div>
       </div>
+
+      <TaskModal
+        isOpen={taskModal}
+        mode="edit"
+        onClose={setStateToFalse(setTaskModal)}
+        task={task}
+      />
 
       <ConfirmModal
         isOpen={confirmOpen}
