@@ -12,6 +12,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useTasks } from "./taskContext";
 
 /* eslint-disable react-refresh/only-export-components */
 const TimerContext = createContext<TimerContextType | undefined>(undefined);
@@ -60,6 +61,8 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const initialState = loadTimerState();
+
+  const { activeTask, incrementPomodoro, setActiveTask } = useTasks();
 
   const [timeLeft, setTimeLeft] = useState<number>(
     initialState?.timeLeft ?? WORK_TIME
@@ -132,6 +135,17 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
     if (phase === "POMODORO") {
       const cycleCount = pomodoroCount + 1;
       setPomodoroCount(cycleCount);
+
+      if (activeTask) {
+        incrementPomodoro(activeTask.id);
+
+        if (
+          activeTask.completedPomodoros + 1 >=
+          activeTask.estimatedPomodoros
+        ) {
+          setActiveTask(null);
+        }
+      }
 
       // Decide qual pausa vêm a seguir
       if (cycleCount % POMODOROS_FOR_LONG_BREAK === 0) {
