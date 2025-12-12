@@ -87,11 +87,7 @@ export default function Home() {
               />
             </div>
 
-            <div className={styles.tasks}>
-              {tasks.map((task, i) => (
-                <Task key={i} task={task} />
-              ))}
-            </div>
+            <div className={styles.tasks}>{allTasks}</div>
           </div>
         </section>
       </main>
