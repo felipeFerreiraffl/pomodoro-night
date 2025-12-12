@@ -30,6 +30,10 @@ export type TaskAction =
       payload: string;
     }
   | {
+      type: "DELETE_ALL_TASKS";
+      payload: void;
+    }
+  | {
       type: "COMPLETE_TASK";
       payload: string;
     }
@@ -60,6 +64,7 @@ export interface TaskContextType {
   ) => void;
   editTask: (id: string, updates: Partial<Task>) => void;
   deleteTask: (id: string) => void;
+  deleteAllTasks: () => void;
   completeTask: (id: string) => void;
   setActiveTask: (id: string | null) => void;
   incrementPomodoro: (id: string) => void;

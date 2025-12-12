@@ -36,6 +36,10 @@ const tasksReducer = (state: Task[], action: TaskAction) => {
       return state.filter((task) => task?.id !== action?.payload);
     }
 
+    case "DELETE_ALL_TASKS": {
+      return state = [];
+    }
+
     case "COMPLETE_TASK": {
       return state.map((task) =>
         task.id === action.payload
@@ -137,6 +141,10 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: "DELETE_TASK", payload: id });
   };
 
+  const deleteAllTasks = () => {
+    dispatch({ type: "DELETE_ALL_TASKS", payload: undefined });
+  };
+
   const completeTask = (id: string) => {
     dispatch({ type: "COMPLETE_TASK", payload: id });
   };
@@ -156,6 +164,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     addTask,
     editTask,
     deleteTask,
+    deleteAllTasks,
     completeTask,
     setActiveTask,
     incrementPomodoro,
