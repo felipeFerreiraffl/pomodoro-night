@@ -24,11 +24,19 @@
 .timerLabel {
   font: var(--font-body-large_regular);
   color: rgb(var(--color-white));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-large_regular);
+  }
 }
 
 .timerTime {
   font: var(--font-title-ttl_h1);
   color: rgb(var(--color-title));
+
+  @media (max-width: 488px) {
+    font: var(--font-title-ttl_h2);
+  }
 }
 
 .buttonsContainer {
@@ -43,7 +51,7 @@
   align-items: center;
   justify-content: center;
   width: var(--size-60);
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1;
   color: rgb(var(--color-white));
   background-color: rgb(var(--color-primary) / 0.5);
   border-radius: var(--radius-12);

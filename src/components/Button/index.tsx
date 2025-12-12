@@ -1,7 +1,6 @@
 import type { Icon } from "@phosphor-icons/react";
 import CustomIcon from "../Icon";
 import styles from "./styles.module.css";
-import type React from "react";
 
 interface ButtonProps {
   type: "default" | "delete" | "save";

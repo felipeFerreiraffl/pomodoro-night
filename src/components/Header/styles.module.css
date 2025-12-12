@@ -12,6 +12,12 @@
   background-color: rgb(var(--color-black));
   border-bottom: var(--border-opacity);
   z-index: var(--zindex-header);
+
+  @media (max-width: 488px) {
+    justify-content: space-around;
+    padding: var(--size-24) var(--size-20);
+    gap: 0;
+  }
 }
 
 .logo {

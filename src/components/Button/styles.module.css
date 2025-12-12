@@ -8,6 +8,7 @@
   padding: var(--size-12);
   color: rgb(var(--color-white));
   border-radius: var(--radius-12);
+  text-wrap: nowrap;
   transition: background-color var(--transition-def),
     box-shadow var(--transition-def);
 }
