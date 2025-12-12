@@ -48,6 +48,15 @@ export default function TaskModal({
 
   if (!isOpen) return null;
 
+  const handleClose = () => {
+    setTitle("");
+    setDescription("");
+    setPomodoros(1);
+    setPriority("medium");
+
+    onClose();
+  };
+
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -86,13 +95,13 @@ export default function TaskModal({
       editTask(task.id, taskData);
     }
 
-    onClose();
+    handleClose();
   };
 
   return (
     <div className={styles.overlay}>
       <form ref={formRef} className={styles.modal} onSubmit={handleSubmit}>
-        <button className={styles.closeIcon} onClick={onClose}>
+        <button className={styles.closeIcon} onClick={handleClose}>
           <Icon icon={icons.function.x} weight="regular" />
         </button>
 
