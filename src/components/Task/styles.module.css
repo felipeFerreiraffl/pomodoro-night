@@ -25,6 +25,11 @@
   }
 }
 
+.task.dragging {
+  transform: scale(1.05);
+  transform-origin: center;
+}
+
 .task:hover {
   box-shadow: var(--shadow-task);
 }

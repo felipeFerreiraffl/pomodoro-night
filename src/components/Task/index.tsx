@@ -1,13 +1,16 @@
 import { useTasks } from "@/services/contexts/taskContext";
 import { useTimer } from "@/services/contexts/timerContext";
+import { ItemTypes } from "@/types/drag.types";
 import type { Task as TaskType } from "@/types/task.type";
 import { icons } from "@/utils/icons";
 import { setStateToFalse } from "@/utils/setState";
+import { id } from "date-fns/locale";
 import { useState } from "react";
+import { useDrag } from "react-dnd";
 import ConfirmModal from "../ConfirmModal";
 import Icon from "../Icon";
-import styles from "./styles.module.css";
 import TaskModal from "../TaskModal";
+import styles from "./styles.module.css";
 
 interface TaskProps {
   task: TaskType;
@@ -19,6 +22,17 @@ export default function Task({ task }: TaskProps) {
 
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [taskModal, setTaskModal] = useState<boolean>(false);
+
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: ItemTypes.CARD,
+      item: () => ({ task }),
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    }),
+    [task]
+  );
 
   const handleSelectTask = () => {
     setActiveTask(task.id);
@@ -48,15 +62,17 @@ export default function Task({ task }: TaskProps) {
 
   return (
     <>
-      <div className={styles.task} onClick={handleSelectTask}>
+      <div
+        ref={drag}
+        className={`${styles.task} ${isDragging ? styles.dragging : ""}`}
+        onClick={handleSelectTask}>
         <button
           className={`${styles.finishButton} tooltip-absolute`}
           data-tooltip="Definir como finalizada"
           onClick={(e) => {
             e.stopPropagation();
             handleComplete();
-          }}
-        >
+          }}>
           <Icon icon={icons.common.check_circle} weight="fill" />
         </button>
 
@@ -73,8 +89,7 @@ export default function Task({ task }: TaskProps) {
             onClick={(e) => {
               e.stopPropagation();
               setTaskModal(true);
-            }}
-          >
+            }}>
             <Icon icon={icons.function.pencil_simple} weight="regular" />
           </button>
           <button
@@ -82,8 +97,7 @@ export default function Task({ task }: TaskProps) {
             onClick={(e) => {
               e.stopPropagation();
               setConfirmOpen(true);
-            }}
-          >
+            }}>
             <Icon icon={icons.function.trash} weight="regular" />
           </button>
         </div>
