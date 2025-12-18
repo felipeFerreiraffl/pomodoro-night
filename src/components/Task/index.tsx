@@ -4,7 +4,6 @@ import { ItemTypes } from "@/types/drag.types";
 import type { Task as TaskType } from "@/types/task.type";
 import { icons } from "@/utils/icons";
 import { setStateToFalse } from "@/utils/setState";
-import { id } from "date-fns/locale";
 import { useState } from "react";
 import { useDrag } from "react-dnd";
 import ConfirmModal from "../ConfirmModal";
@@ -23,19 +22,22 @@ export default function Task({ task }: TaskProps) {
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [taskModal, setTaskModal] = useState<boolean>(false);
 
-  const [{ isDragging }, drag] = useDrag(
+  const [{ isDragging, didDrop }, drag] = useDrag(
     () => ({
       type: ItemTypes.CARD,
       item: () => ({ task }),
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
+        didDrop: monitor.didDrop(),
       }),
     }),
     [task]
   );
 
   const handleSelectTask = () => {
-    setActiveTask(task.id);
+    if (didDrop) {
+      setActiveTask(task.id);
+    }
 
     if (status === "RUNNING") {
       startTimer();
