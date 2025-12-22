@@ -11,24 +11,34 @@ import Task from "@/components/Task";
 import ConfirmModal from "@/components/ConfirmModal";
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "@/types/drag.types";
+import type { Task as TaskType } from "@/types/task.type";
 
 export default function Home() {
-  const { tasks, deleteAllTasks, activeTask } = useTasks();
+  const { tasks, deleteAllTasks, setActiveTask, activeTask } = useTasks();
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState<boolean>(false);
 
-  const [{ isOver, getItem }, dropRef] = useDrop(() => ({
-    accept: ItemTypes.CARD,
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      getItem: monitor.getItem(),
+  const [{ isOver }, dropRef] = useDrop<
+    { task: TaskType },
+    void,
+    { isOver: boolean }
+  >(
+    () => ({
+      accept: ItemTypes.CARD,
+      drop: (item) => {
+        setActiveTask(item.task.id);
+      },
+      collect: (monitor) => ({
+        isOver: monitor.isOver(),
+      }),
     }),
-  }));
+    [setActiveTask]
+  );
 
   console.log(`O Drag está foi colocado em cima do Drop: ${isOver}`);
   console.log(
-    `Item draggable que está sendo arrastado: ${JSON.stringify(getItem)}`
+    `Tarefa que está ativa: ${activeTask?.title || "Nenhuma tarefa ativa"}`
   );
 
   const allTasks = tasks.map((task, i) => <Task key={i} task={task} />);
@@ -50,7 +60,7 @@ export default function Home() {
         <aside className={styles.hero}>
           <Timer />
 
-          {isOver && activeTask ? (
+          {activeTask ? (
             <Task task={activeTask} />
           ) : (
             <div ref={dropRef} className={styles.dropArea}>

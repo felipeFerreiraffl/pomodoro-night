@@ -16,33 +16,21 @@ interface TaskProps {
 }
 
 export default function Task({ task }: TaskProps) {
-  const { deleteTask, completeTask, setActiveTask } = useTasks();
-  const { startTimer, status } = useTimer();
+  const { deleteTask, completeTask, activeTask } = useTasks();
 
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [taskModal, setTaskModal] = useState<boolean>(false);
 
-  const [{ isDragging, didDrop }, drag] = useDrag(
+  const [{ isDragging }, dragRef] = useDrag(
     () => ({
       type: ItemTypes.CARD,
       item: () => ({ task }),
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
-        didDrop: monitor.didDrop(),
       }),
     }),
     [task]
   );
-
-  const handleSelectTask = () => {
-    if (didDrop) {
-      setActiveTask(task.id);
-    }
-
-    if (status === "RUNNING") {
-      startTimer();
-    }
-  };
 
   const handleComplete = () => {
     completeTask(task.id);
@@ -65,9 +53,10 @@ export default function Task({ task }: TaskProps) {
   return (
     <>
       <div
-        ref={drag}
-        className={`${styles.task} ${isDragging ? styles.dragging : ""}`}
-        onClick={handleSelectTask}>
+        ref={dragRef}
+        className={`${styles.task} ${isDragging ? styles.dragging : ""} ${
+          activeTask?.id === task.id ? styles.active : ""
+        }`}>
         <button
           className={`${styles.finishButton} tooltip-absolute`}
           data-tooltip="Definir como finalizada"

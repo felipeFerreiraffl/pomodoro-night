@@ -5,6 +5,8 @@ import { TaskProvider } from "./services/contexts/taskContext";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
+// const isTouchDevice = "ontouchstart" in window;
+
 export default function App() {
   return (
     <ThemeProvider>
