@@ -1,10 +1,9 @@
 import { useTasks } from "@/services/contexts/taskContext";
-import { useTimer } from "@/services/contexts/timerContext";
 import { ItemTypes } from "@/types/drag.types";
 import type { Task as TaskType } from "@/types/task.type";
 import { icons } from "@/utils/icons";
 import { setStateToFalse } from "@/utils/setState";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDrag } from "react-dnd";
 import ConfirmModal from "../ConfirmModal";
 import Icon from "../Icon";
@@ -13,13 +12,16 @@ import styles from "./styles.module.css";
 
 interface TaskProps {
   task: TaskType;
+  isDropped?: boolean;
 }
 
-export default function Task({ task }: TaskProps) {
+export default function Task({ task, isDropped = false }: TaskProps) {
   const { deleteTask, completeTask, activeTask } = useTasks();
 
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [taskModal, setTaskModal] = useState<boolean>(false);
+
+  const dragTaskRef = useRef<HTMLDivElement>(null);
 
   const [{ isDragging }, dragRef] = useDrag(
     () => ({
@@ -50,12 +52,14 @@ export default function Task({ task }: TaskProps) {
       ? styles.medium
       : styles.high;
 
+  dragRef(dragTaskRef);
+
   return (
     <>
       <div
-        ref={dragRef}
+        ref={dragTaskRef}
         className={`${styles.task} ${isDragging ? styles.dragging : ""} ${
-          activeTask?.id === task.id ? styles.active : ""
+          activeTask?.id === task.id && isDropped ? styles.active : ""
         }`}>
         <button
           className={`${styles.finishButton} tooltip-absolute`}
