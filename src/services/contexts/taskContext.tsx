@@ -37,7 +37,7 @@ const tasksReducer = (state: Task[], action: TaskAction) => {
     }
 
     case "DELETE_ALL_TASKS": {
-      return state = [];
+      return (state = []);
     }
 
     case "COMPLETE_TASK": {
