@@ -1,17 +1,17 @@
 import Button from "@/components/Button";
-import Icon from "@/components/Icon";
-import Timer from "@/components/Timer";
-import { icons } from "@/utils/icons";
-import styles from "./styles.module.css";
-import { setStateToFalse, setStateToTrue } from "@/utils/setState";
-import { useRef, useState } from "react";
-import TaskModal from "@/components/TaskModal";
-import { useTasks } from "@/services/contexts/taskContext";
-import Task from "@/components/Task";
 import ConfirmModal from "@/components/ConfirmModal";
-import { useDrop, type DropTargetMonitor } from "react-dnd";
+import Icon from "@/components/Icon";
+import Task from "@/components/Task";
+import TaskModal from "@/components/TaskModal";
+import Timer from "@/components/Timer";
+import { useTasks } from "@/services/contexts/taskContext";
 import { ItemTypes } from "@/types/drag.types";
 import type { Task as TaskType } from "@/types/task.type";
+import { icons } from "@/utils/icons";
+import { setStateToFalse, setStateToTrue } from "@/utils/setState";
+import { useRef, useState } from "react";
+import { useDrop, type DropTargetMonitor } from "react-dnd";
+import styles from "./styles.module.css";
 
 export default function Home() {
   const { tasks, deleteAllTasks, setActiveTask, activeTask } = useTasks();
@@ -21,7 +21,7 @@ export default function Home() {
 
   const dropAreaRef = useRef<HTMLDivElement>(null);
 
-  const [isOver, dropRef] = useDrop(
+  const [{ isOver }, dropRef] = useDrop(
     () => ({
       accept: ItemTypes.CARD,
       drop: (item: { task: TaskType }) => {
@@ -51,6 +51,8 @@ export default function Home() {
 
   dropRef(dropAreaRef);
 
+  console.log(`O Drag está sobre o Drop? ${isOver}`);
+
   return (
     <>
       <main className={styles.main}>
@@ -58,7 +60,9 @@ export default function Home() {
           <Timer />
 
           {activeTask ? (
-            <Task task={activeTask} />
+            <div data-tooltip="Clique para cancelar tarefa">
+              <Task task={activeTask} isClickable />
+            </div>
           ) : (
             <div ref={dropAreaRef} className={styles.dropArea}>
               <Icon

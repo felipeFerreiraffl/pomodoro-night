@@ -2,7 +2,7 @@ import { useTasks } from "@/services/contexts/taskContext";
 import { ItemTypes } from "@/types/drag.types";
 import type { Task as TaskType } from "@/types/task.type";
 import { icons } from "@/utils/icons";
-import { setStateToFalse } from "@/utils/setState";
+import { setStateToFalse, setStateToTrue } from "@/utils/setState";
 import { useRef, useState } from "react";
 import { useDrag } from "react-dnd";
 import ConfirmModal from "../ConfirmModal";
@@ -13,12 +13,18 @@ import styles from "./styles.module.css";
 interface TaskProps {
   task: TaskType;
   isDropped?: boolean;
+  isClickable?: boolean;
 }
 
-export default function Task({ task, isDropped = false }: TaskProps) {
-  const { deleteTask, completeTask, activeTask } = useTasks();
+export default function Task({
+  task,
+  isDropped = false,
+  isClickable = false,
+}: TaskProps) {
+  const { deleteTask, completeTask, activeTask, setActiveTask } = useTasks();
 
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
+  const [confirmCancel, setConfirmCancel] = useState<boolean>(false);
   const [taskModal, setTaskModal] = useState<boolean>(false);
 
   const dragTaskRef = useRef<HTMLDivElement>(null);
@@ -36,11 +42,13 @@ export default function Task({ task, isDropped = false }: TaskProps) {
 
   const handleComplete = () => {
     completeTask(task.id);
+    setActiveTask(null);
   };
 
   const handleDelete = () => {
     deleteTask(task.id);
     setConfirmOpen(false);
+    setActiveTask(null);
   };
 
   const pomodoroCountText = `${task.completedPomodoros}/${task.estimatedPomodoros}`;
@@ -52,6 +60,12 @@ export default function Task({ task, isDropped = false }: TaskProps) {
       ? styles.medium
       : styles.high;
 
+  const handleCancelTask = () => {
+    if (isClickable && activeTask?.id === task.id) {
+      setActiveTask(null);
+    }
+  };
+
   dragRef(dragTaskRef);
 
   return (
@@ -60,10 +74,11 @@ export default function Task({ task, isDropped = false }: TaskProps) {
         ref={dragTaskRef}
         className={`${styles.task} ${isDragging ? styles.dragging : ""} ${
           activeTask?.id === task.id && isDropped ? styles.active : ""
-        }`}>
+        }`}
+        style={{ cursor: isClickable ? "pointer" : "grab" }}
+        onClick={setStateToTrue(setConfirmCancel)}>
         <button
-          className={`${styles.finishButton} tooltip-absolute`}
-          data-tooltip="Definir como finalizada"
+          className={styles.finishButton}
           onClick={(e) => {
             e.stopPropagation();
             handleComplete();
@@ -105,6 +120,13 @@ export default function Task({ task, isDropped = false }: TaskProps) {
         mode="edit"
         onClose={setStateToFalse(setTaskModal)}
         task={task}
+      />
+
+      <ConfirmModal
+        isOpen={confirmCancel}
+        message="Deseja cancelar a tarefa ativa?"
+        onConfirm={handleCancelTask}
+        onCancel={setStateToFalse(setConfirmCancel)}
       />
 
       <ConfirmModal

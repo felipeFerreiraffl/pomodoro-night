@@ -100,6 +100,7 @@ const loadTasks = (): Task[] => {
       ...task,
       createdAt: new Date(task?.createdAt),
       completedAt: task?.completedAt ? new Date(task.completedAt) : undefined,
+      active: false,
     }));
   } catch (error) {
     console.error(`Erro ao carregar tarefas: ${error}`);
@@ -109,7 +110,12 @@ const loadTasks = (): Task[] => {
 
 const saveTasks = (tasks: Task[]) => {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    const taskToSave = tasks.map((task) => ({
+      ...task,
+      active: false,
+    }));
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(taskToSave));
   } catch (error) {
     console.error(`Erro ao salvar tarefas: ${error}`);
   }

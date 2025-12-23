@@ -6,7 +6,6 @@
 }
 
 .task {
-  cursor: grab;
   position: relative;
   gap: var(--size-24);
   width: var(--size-376);
