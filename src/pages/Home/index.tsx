@@ -9,7 +9,7 @@ import { ItemTypes } from "@/types/drag.types";
 import type { Task as TaskType } from "@/types/task.type";
 import { icons } from "@/utils/icons";
 import { setStateToFalse, setStateToTrue } from "@/utils/setState";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDrop, type DropTargetMonitor } from "react-dnd";
 import styles from "./styles.module.css";
 
@@ -49,7 +49,11 @@ export default function Home() {
     setIsConfirmOpen(false);
   };
 
-  dropRef(dropAreaRef);
+  useEffect(() => {
+    if (!activeTask && dropAreaRef.current) {
+      dropRef(dropAreaRef);
+    }
+  }, [activeTask, dropRef]);
 
   console.log(`O Drag está sobre o Drop? ${isOver}`);
 
