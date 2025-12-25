@@ -55,8 +55,6 @@ export default function Home() {
     }
   }, [activeTask, dropRef]);
 
-  console.log(`O Drag está sobre o Drop? ${isOver}`);
-
   return (
     <>
       <main className={styles.main}>
