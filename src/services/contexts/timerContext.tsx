@@ -137,14 +137,15 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
       setPomodoroCount(cycleCount);
 
       if (activeTask) {
-        incrementPomodoro(activeTask.id);
-
         if (
           activeTask.completedPomodoros + 1 >=
           activeTask.estimatedPomodoros
         ) {
+          setPhase("POMODORO");
           setActiveTask(null);
         }
+
+        incrementPomodoro(activeTask.id);
       }
 
       // Decide qual pausa vêm a seguir
@@ -193,6 +194,8 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
 
   const startTimer = () => {
     if (status === "RUNNING") return;
+
+    if (!activeTask) return;
 
     setStatus("RUNNING");
     startTimeRef.current = Date.now();

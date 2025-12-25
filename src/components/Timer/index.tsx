@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 import { useState } from "react";
 import { setStateToFalse, setStateToTrue } from "@/utils/setState";
 import ConfirmModal from "../ConfirmModal";
+import { useTasks } from "@/services/contexts/taskContext";
 
 export default function Timer() {
   const {
@@ -18,6 +19,8 @@ export default function Timer() {
     startTimer,
     status,
   } = useTimer();
+
+  const { activeTask } = useTasks();
 
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
 
@@ -48,22 +51,25 @@ export default function Timer() {
 
       <div className={styles.buttonsContainer}>
         <button
-          className={styles.button}
+          className={`${styles.button} ${!activeTask ? styles.disabled : ""}`}
           onClick={status === "RUNNING" ? pauseTimer : startTimer}
-        >
+          disabled={activeTask === null}>
           <Icon icon={playPauseIcon} size={40} weight="fill" />
         </button>
         <button
-          className={styles.button}
+          className={`${styles.button} ${!activeTask ? styles.disabled : ""}`}
           onClick={setStateToTrue(setShowConfirm)}
-        >
+          disabled={activeTask === null}>
           <Icon
             icon={icons.function.arrows_clockwise}
             size={40}
             weight="fill"
           />
         </button>
-        <button className={styles.button} onClick={skipTimer}>
+        <button
+          className={`${styles.button} ${!activeTask ? styles.disabled : ""}`}
+          onClick={skipTimer}
+          disabled={activeTask === null}>
           <Icon
             icon={icons.function.arrow_fat_line_right}
             size={40}

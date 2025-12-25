@@ -58,6 +58,11 @@
   transition: background-color var(--transition-def);
 }
 
+.button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .button:hover {
   background-color: rgb(var(--color-primary));
 }
