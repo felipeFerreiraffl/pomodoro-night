@@ -56,6 +56,10 @@
   }
 }
 
+.finishButton.completed {
+  color: rgb(var(--color-green));
+}
+
 .finishButton:hover {
   color: rgb(var(--color-title));
 }

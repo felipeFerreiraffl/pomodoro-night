@@ -68,6 +68,8 @@ export default function Task({
 
   dragRef(dragTaskRef);
 
+  console.log(`Tarefa está completa? ${task.completed}`);
+
   return (
     <>
       <div
@@ -78,7 +80,9 @@ export default function Task({
         style={{ cursor: isClickable ? "pointer" : "grab" }}
         onClick={setStateToTrue(setConfirmCancel)}>
         <button
-          className={styles.finishButton}
+          className={`${styles.finishButton} ${
+            task.completed ? styles.completed : ""
+          }`}
           onClick={(e) => {
             e.stopPropagation();
             handleComplete();
