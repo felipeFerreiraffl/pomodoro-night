@@ -141,8 +141,12 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
           activeTask.completedPomodoros + 1 >=
           activeTask.estimatedPomodoros
         ) {
-          setPhase("POMODORO");
           setActiveTask(null);
+          setPhase("POMODORO");
+          setTimeLeft(WORK_TIME);
+          resetTimer();
+          saveTimerState();
+          return;
         }
 
         incrementPomodoro(activeTask.id);
@@ -213,6 +217,8 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const skipTimer = () => {
+    if (!activeTask) return;
+
     clearTimer();
     handleTimerCompleted();
     saveTimerState();
