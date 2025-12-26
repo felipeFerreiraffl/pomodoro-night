@@ -20,21 +20,29 @@ export default function TaskModal({
   mode,
   task,
 }: TaskModalProps) {
-  const formRef = useRef<HTMLFormElement | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const { addTask, editTask } = useTasks();
 
-  const [title, setTitle] = useState<string>(() =>
-    mode === "edit" && task ? task.title : ""
-  );
-  const [description, setDescription] = useState<string>(() =>
-    mode === "edit" && task ? task.description || "" : ""
-  );
-  const [pomodoros, setPomodoros] = useState<number>(() =>
-    mode === "edit" && task ? task.estimatedPomodoros : 1
-  );
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string | undefined>("");
+  const [pomodoros, setPomodoros] = useState<number>(1);
   const [priority, setPriority] = useState<
     "low" | "medium" | "high" | undefined
-  >(() => (mode === "edit" && task ? task.priority : "medium"));
+  >("medium");
+
+  useEffect(() => {
+    if (isOpen && mode === "edit" && task) {
+      setTitle(task.title);
+      setDescription(task.description);
+      setPomodoros(task.estimatedPomodoros);
+      setPriority(task.priority);
+    } else if (isOpen && mode === "add") {
+      setTitle("");
+      setDescription("");
+      setPomodoros(1);
+      setPriority("medium");
+    }
+  }, [isOpen, mode, task]);
 
   useEffect(() => {
     if (formRef.current && isOpen) {
@@ -84,7 +92,7 @@ export default function TaskModal({
 
     const taskData = {
       title: title.trim(),
-      description: description.trim() || undefined,
+      description: description?.trim() || undefined,
       priority,
       estimatedPomodoros: pomodoros,
     };
@@ -150,8 +158,7 @@ export default function TaskModal({
                     className={`${styles.priorityIndicator} ${styles.low} ${
                       priority === "low" ? styles.active : ""
                     }`}
-                    onClick={() => setPriority("low")}
-                  ></button>
+                    onClick={() => setPriority("low")}></button>
                   <span className={styles.priorityLabel}>Baixa</span>
                 </div>
                 <div className={styles.priority}>
@@ -160,8 +167,7 @@ export default function TaskModal({
                     className={`${styles.priorityIndicator} ${styles.medium} ${
                       priority === "medium" ? styles.active : ""
                     }`}
-                    onClick={() => setPriority("medium")}
-                  ></button>
+                    onClick={() => setPriority("medium")}></button>
                   <span className={styles.priorityLabel}>Média</span>
                 </div>
                 <div className={styles.priority}>
@@ -170,8 +176,7 @@ export default function TaskModal({
                     className={`${styles.priorityIndicator} ${styles.high} ${
                       priority === "high" ? styles.active : ""
                     }`}
-                    onClick={() => setPriority("high")}
-                  ></button>
+                    onClick={() => setPriority("high")}></button>
                   <span className={styles.priorityLabel}>Alta</span>
                 </div>
               </div>
