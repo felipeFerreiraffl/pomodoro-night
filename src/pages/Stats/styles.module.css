@@ -9,3 +9,49 @@
   font: var(--font-title-ttl_h1);
   color: rgb(var(--color-title));
 }
+
+.mainStats {
+  display: flex;
+  align-items: center;
+  gap: var(--size-20);
+}
+
+.countingStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-12);
+  width: min(var(--size-320), 22vw);
+  padding: var(--size-40) 0;
+  border: var(--border-normal);
+  border-radius: var(--size-20);
+}
+
+.countingTitle {
+  font: var(--font-body-large_bold);
+  color: rgb(var(--color-white));
+}
+
+.numberContainer {
+  position: relative;
+}
+
+.number {
+  font: var(--font-title-ttl_h2);
+  color: rgb(var(--color-white));
+}
+
+.increment {
+  position: absolute;
+  top: 0;
+  left: calc(100% + var(--size-4));
+
+  color: rgb(var(--color-green));
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-80);
+}
