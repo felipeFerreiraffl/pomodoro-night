@@ -1,4 +1,6 @@
+import Icon from "@/components/Icon";
 import styles from "./styles.module.css";
+import { icons } from "@/utils/icons";
 
 export default function Stats() {
   return (
@@ -30,6 +32,44 @@ export default function Stats() {
               <div className={styles.numberContainer}>
                 <p className={styles.number}>1h 20 min</p>
                 <span className={styles.increment}>+4 min</span>
+              </div>
+            </div>
+          </section>
+
+          <section className={styles.streakContainer}>
+            <div className={styles.streakStats}>
+              <div className={styles.streakSequence}>
+                <h2 className={styles.streakTitle}>Sequência atual</h2>
+                <div className={styles.streakNumberContainer}>
+                  <Icon
+                    className={styles.streakNumberIcon}
+                    icon={icons.common.fire_simple}
+                    weight="regular"
+                  />
+                  <span className={styles.streakNumber}>3</span>
+                </div>
+              </div>
+              <div className={styles.streakSequence}>
+                <h2 className={styles.streakTitle}>Maior sequência</h2>
+                <div className={styles.streakNumberContainer}>
+                  <Icon
+                    className={styles.streakNumberIcon}
+                    icon={icons.common.fire_simple}
+                    weight="regular"
+                  />
+                  <span className={styles.streakNumber}>8</span>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.streakWeek}>
+              <div className={styles.streakWeekDay}>
+                <p className={styles.streakWeekDayText}>Dom</p>
+                <Icon
+                  className={styles.streakWeekDayIcon}
+                  icon={icons.common.check_circle}
+                  weight="fill"
+                />
               </div>
             </div>
           </section>

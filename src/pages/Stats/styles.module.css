@@ -55,3 +55,65 @@
   align-items: center;
   gap: var(--size-80);
 }
+
+.streakContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--size-80);
+}
+
+.streakStats {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--size-40);
+}
+
+.streakSequence {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--size-12);
+}
+
+.streakTitle {
+  font: var(--font-title-ttl_h3);
+  color: rgb(var(--color-title));
+}
+
+.streakNumberContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--size-8);
+}
+
+.streakNumberIcon {
+  font-size: var(--size-40);
+  color: rgb(var(--color-red));
+}
+
+.streakNumber {
+  font: var(--font-title-ttl_h2);
+  color: rgb(var(--color-white));
+}
+
+.streakWeek {
+  display: flex;
+}
+
+.streakWeekDay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-4);
+}
+
+.streakWeekDayText {
+  font: var(--font-body-xlarge_bold);
+  color: rgb(var(--color-white));
+}
+
+.streakWeekDayIcon {
+  font-size: var(--size-56);
+  color: rgb(var(--color-green));
+}
