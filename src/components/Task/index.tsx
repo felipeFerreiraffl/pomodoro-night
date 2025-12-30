@@ -68,8 +68,6 @@ export default function Task({
 
   dragRef(dragTaskRef);
 
-  console.log(`Tarefa está completa? ${task.completed}`);
-
   return (
     <>
       <div
