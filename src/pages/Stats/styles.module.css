@@ -1,0 +1,11 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-60);
+}
+
+.mainTitle {
+  font: var(--font-title-ttl_h1);
+  color: rgb(var(--color-title));
+}
