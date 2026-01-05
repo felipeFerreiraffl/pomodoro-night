@@ -73,6 +73,49 @@ export default function Stats() {
               </div>
             </div>
           </section>
+
+          <section className={styles.periodStatsContainer}>
+            <div className={styles.periodProductionContainer}>
+              <h2 className={styles.periodProductionTitle}>
+                Qual período você é mais produtivo?
+              </h2>
+
+              <div className={styles.periodProductionTimes}>
+                <div className={styles.periodTime}>
+                  <h3 className={styles.periodTimeLabel}>Manhã (6h - 12h)</h3>
+
+                  <div className={styles.periodTimeProgressContainer}>
+                    <progress
+                      value={0.8}
+                      className={styles.periodTimeProgress}></progress>
+                    <span className={styles.periodTimeProgressNumber}>80%</span>
+                  </div>
+                </div>
+
+                <div className={styles.periodTime}>
+                  <h3 className={styles.periodTimeLabel}>Tarde (12h - 18h)</h3>
+
+                  <div className={styles.periodTimeProgressContainer}>
+                    <progress
+                      value={0.5}
+                      className={styles.periodTimeProgress}></progress>
+                    <span className={styles.periodTimeProgressNumber}>50%</span>
+                  </div>
+                </div>
+
+                <div className={styles.periodTime}>
+                  <h3 className={styles.periodTimeLabel}>Noite (18h - 24h)</h3>
+
+                  <div className={styles.periodTimeProgressContainer}>
+                    <progress
+                      value={0.7}
+                      className={styles.periodTimeProgress}></progress>
+                    <span className={styles.periodTimeProgressNumber}>70%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
     </>

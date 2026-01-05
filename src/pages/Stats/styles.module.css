@@ -117,3 +117,69 @@
   font-size: var(--size-56);
   color: rgb(var(--color-green));
 }
+
+.periodStatsContainer {
+  display: flex;
+  align-items: start;
+}
+
+.periodProductionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--size-32);
+}
+
+.periodProductionTitle {
+  font: var(--font-title-ttl_h3);
+  color: rgb(var(--color-title));
+}
+
+.periodProductionTimes {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--size-24);
+}
+
+.periodTime {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--size-12);
+}
+
+.periodTimeLabel {
+  font: var(--font-body-xlarge_bold);
+  color: rgb(var(--color-white));
+}
+
+.periodTimeProgressContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--size-12);
+}
+
+.periodTimeProgress {
+  appearance: none;
+  -webkit-appearance: none;
+  width: var(--size-380);
+  height: var(--size-40);
+  border: none;
+}
+
+.periodTimeProgress::-webkit-progress-bar {
+  background-color: rgb(var(--color-primary) / 0.2);
+  border-radius: var(--size-12);
+  padding: var(--size-8);
+}
+
+.periodTimeProgress::-webkit-progress-value {
+  background-color: rgb(var(--color-primary));
+  border-radius: var(--size-8);
+}
+
+.periodTimeProgressNumber {
+  font: var(--font-body-large_regular);
+  color: rgb(var(--color-white));
+}
