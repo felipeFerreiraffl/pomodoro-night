@@ -183,3 +183,66 @@
   font: var(--font-body-large_regular);
   color: rgb(var(--color-white));
 }
+
+.productionContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--size-80);
+}
+
+.productionComparison {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-32);
+}
+
+.productionComparisonTitle {
+  font: var(--font-title-ttl_h3);
+  color: rgb(var(--color-title));
+}
+
+.productionComparisonContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--size-20);
+}
+
+.productionDayCount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-4);
+  color: rgb(var(--color-white));
+}
+
+.productionDay {
+  font: var(--font-body-medium_bold);
+}
+
+.productionNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-normal);
+  width: var(--size-80);
+  aspect-ratio: 1;
+  border-radius: var(--radius-12);
+  font: var(--font-title-ttl_h2);
+}
+
+.productionIncrementContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.productionIcon {
+  font-size: var(--size-68);
+  color: rgb(var(--color-primary));
+}
+
+.productionIncrement {
+  font: var(--font-body-xlarge_regular);
+  color: rgb(var(--color-green));
+}

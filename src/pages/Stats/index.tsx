@@ -116,6 +116,35 @@ export default function Stats() {
               </div>
             </div>
           </section>
+
+          <section className={styles.productionContainer}>
+            <div className={styles.productionComparison}>
+              <h2 className={styles.productionComparisonTitle}>
+                Comparativo com ontem
+              </h2>
+
+              <div className={styles.productionComparisonContainer}>
+                <div className={styles.productionDayCount}>
+                  <span className={styles.productionDay}>Ontem</span>
+                  <p className={styles.productionNumber}>2</p>
+                </div>
+
+                <div className={styles.productionIncrementContainer}>
+                  <span className={styles.productionIncrement}>+3</span>
+                  <Icon
+                    className={styles.productionIcon}
+                    icon={icons.common.arrow_right}
+                    weight="fill"
+                  />
+                </div>
+
+                <div className={styles.productionDayCount}>
+                  <span className={styles.productionDay}>Hoje</span>
+                  <p className={styles.productionNumber}>5</p>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
     </>
