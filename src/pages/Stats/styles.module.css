@@ -186,7 +186,7 @@
 
 .productionContainer {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: var(--size-80);
 }
 
@@ -237,12 +237,93 @@
   align-items: center;
 }
 
+.productionIncrement {
+  font: var(--font-body-xlarge_regular);
+  color: rgb(var(--color-green));
+}
+
 .productionIcon {
   font-size: var(--size-68);
   color: rgb(var(--color-primary));
 }
 
-.productionIncrement {
-  font: var(--font-body-xlarge_regular);
+.productivityDays {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-20);
+}
+
+.productivityDaysTitle {
+  font: var(--font-title-ttl_h3);
+  color: rgb(var(--color-title));
+}
+
+.productivityDaysContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-12);
+}
+
+.productivityDaysMetrics {
+  display: flex;
+  align-items: center;
+  gap: var(--size-40);
+}
+
+.productivityDayStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-8);
+}
+
+.productivityLabel {
+  font: var(--font-body-xlarge_bold);
+  color: rgb(var(--color-white));
+}
+
+.productivityDayContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-8);
+  width: var(--size-240);
+  padding: var(--size-12) 0;
+  border: var(--border-normal);
+  border-radius: var(--radius-20);
+}
+
+.productivityDayWeekDay {
+  font: var(--font-title-ttl_h2);
+}
+
+.positiveDay {
   color: rgb(var(--color-green));
+}
+
+.negativeDay {
+  color: rgb(var(--color-red));
+}
+
+.productivityDayMean {
+  font: var(--font-body-large_regular);
+  color: rgb(var(--color-white) / 0.5);
+}
+
+.productivityTipContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--size-12);
+}
+
+.productivityTipIcon {
+  font-size: var(--size-24);
+  color: rgb(var(--color-yellow));
+}
+
+.productivityTipLabel {
+  font: var(--font-body-large_regular);
+  color: rgb(var(--color-white));
 }

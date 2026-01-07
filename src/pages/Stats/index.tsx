@@ -144,6 +144,59 @@ export default function Stats() {
                 </div>
               </div>
             </div>
+
+            <div className={styles.productivityDays}>
+              <h2 className={styles.productivityDaysTitle}>
+                Dias de produtividade
+              </h2>
+
+              <div className={styles.productivityDaysContent}>
+                <div className={styles.productivityDaysMetrics}>
+                  <div className={styles.productivityDayStat}>
+                    <span className={styles.productivityLabel}>
+                      Dia mais produtivo
+                    </span>
+
+                    <div className={styles.productivityDayContainer}>
+                      <p
+                        className={`${styles.productivityDayWeekDay} ${styles.positiveDay}`}>
+                        Sexta
+                      </p>
+                      <span className={styles.productivityDayMean}>
+                        4.4 pomodoros
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className={styles.productivityDayStat}>
+                    <span className={styles.productivityLabel}>
+                      Dia menos produtivo
+                    </span>
+
+                    <div className={styles.productivityDayContainer}>
+                      <p
+                        className={`${styles.productivityDayWeekDay} ${styles.negativeDay}`}>
+                        Terça
+                      </p>
+                      <span className={styles.productivityDayMean}>
+                        1.2 pomodoros
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.productivityTipContainer}>
+                  <Icon
+                    className={styles.productivityTipIcon}
+                    icon={icons.common.lightbulb}
+                    weight="fill"
+                  />
+                  <span className={styles.productivityTipLabel}>
+                    Marque suas tarefas para sexta!
+                  </span>
+                </div>
+              </div>
+            </div>
           </section>
         </div>
       </main>
