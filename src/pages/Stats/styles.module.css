@@ -46,7 +46,9 @@
   top: 0;
   left: calc(100% + var(--size-4));
 
+  font: var(--font-body-small_regular);
   color: rgb(var(--color-green));
+  text-wrap: nowrap;
 }
 
 .statsContainer {
@@ -121,6 +123,19 @@
 .periodStatsContainer {
   display: flex;
   align-items: start;
+  gap: var(--size-80);
+}
+
+.periodStatsChartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--size-12);
+}
+
+.periodStatsChartLabel {
+  font: var(--font-title-ttl_h3);
+  color: rgb(var(--color-title));
 }
 
 .periodProductionContainer {
