@@ -8,12 +8,34 @@
 .mainTitle {
   font: var(--font-title-ttl_h1);
   color: rgb(var(--color-title));
+
+  @media (max-width: 488px) {
+    font: var(--font-title-ttl_h2);
+  }
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-80);
 }
 
 .mainStats {
+  max-width: 83vw;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: var(--size-20);
+
+  @media (max-width: 884px) {
+    max-width: 90vw;
+  }
+
+  @media (max-width: 488px) {
+    flex-direction: column;
+  }
 }
 
 .countingStat {
@@ -21,7 +43,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--size-12);
-  width: min(var(--size-320), 22vw);
+  width: var(--size-320);
   padding: var(--size-40) 0;
   border: var(--border-normal);
   border-radius: var(--size-20);
@@ -39,6 +61,10 @@
 .number {
   font: var(--font-title-ttl_h2);
   color: rgb(var(--color-white));
+
+  @media (max-width: 488px) {
+    font: var(--font-title-ttl_h3);
+  }
 }
 
 .increment {
@@ -49,19 +75,20 @@
   font: var(--font-body-small_regular);
   color: rgb(var(--color-green));
   text-wrap: nowrap;
-}
 
-.statsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--size-80);
+  @media (max-width: 488px) {
+    font: var(--font-body-xsmall_regular);
+  }
 }
 
 .streakContainer {
   display: flex;
   align-items: center;
   gap: var(--size-80);
+
+  @media (max-width: 884px) {
+    flex-direction: column;
+  }
 }
 
 .streakStats {
@@ -69,6 +96,10 @@
   flex-direction: column;
   align-items: start;
   gap: var(--size-40);
+
+  @media (max-width: 884px) {
+    align-items: center;
+  }
 }
 
 .streakSequence {
@@ -76,11 +107,19 @@
   flex-direction: column;
   align-items: start;
   gap: var(--size-12);
+
+  @media (max-width: 884px) {
+    align-items: center;
+  }
 }
 
 .streakTitle {
   font: var(--font-title-ttl_h3);
   color: rgb(var(--color-title));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-xlarge_bold);
+  }
 }
 
 .streakNumberContainer {
@@ -92,15 +131,25 @@
 .streakNumberIcon {
   font-size: var(--size-40);
   color: rgb(var(--color-red));
+
+  @media (max-width: 488px) {
+    font-size: var(--size-32);
+  }
 }
 
 .streakNumber {
   font: var(--font-title-ttl_h2);
   color: rgb(var(--color-white));
+
+  @media (max-width: 488px) {
+    font: var(--font-title-ttl_h3);
+  }
 }
 
 .streakWeek {
   display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 .streakWeekDay {
@@ -124,6 +173,11 @@
   display: flex;
   align-items: start;
   gap: var(--size-80);
+
+  @media (max-width: 884px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .periodStatsChartContainer {
@@ -133,11 +187,21 @@
   gap: var(--size-12);
   max-height: 31.25rem;
   width: 33.25rem;
+
+  @media (max-width: 488px) {
+    align-items: center;
+    width: var(--size-320);
+    max-height: 18.75rem;
+  }
 }
 
 .periodStatsChartLabel {
   font: var(--font-title-ttl_h3);
   color: rgb(var(--color-title));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-xlarge_bold);
+  }
 }
 
 .periodProductionContainer {
@@ -145,11 +209,22 @@
   flex-direction: column;
   align-items: start;
   gap: var(--size-32);
+
+  @media (max-width: 884px) {
+    width: 90vw;
+    align-items: center;
+  }
 }
 
 .periodProductionTitle {
   font: var(--font-title-ttl_h3);
   color: rgb(var(--color-title));
+  text-align: center;
+
+  @media (max-width: 488px) {
+    font: var(--font-body-xlarge_bold);
+    word-wrap: break-word;
+  }
 }
 
 .periodProductionTimes {
@@ -169,6 +244,10 @@
 .periodTimeLabel {
   font: var(--font-body-xlarge_bold);
   color: rgb(var(--color-white));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-large_bold);
+  }
 }
 
 .periodTimeProgressContainer {
@@ -183,6 +262,10 @@
   width: var(--size-380);
   height: var(--size-40);
   border: none;
+
+  @media (max-width: 488px) {
+    width: var(--size-280);
+  }
 }
 
 .periodTimeProgress::-webkit-progress-bar {
@@ -205,6 +288,11 @@
   display: flex;
   align-items: start;
   gap: var(--size-80);
+
+  @media (max-width: 884px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .productionComparison {
@@ -217,6 +305,11 @@
 .productionComparisonTitle {
   font: var(--font-title-ttl_h3);
   color: rgb(var(--color-title));
+  text-align: center;
+
+  @media (max-width: 488px) {
+    font: var(--font-body-xlarge_bold);
+  }
 }
 
 .productionComparisonContainer {
@@ -235,6 +328,10 @@
 
 .productionDay {
   font: var(--font-body-medium_bold);
+
+  @media (max-width: 488px) {
+    font: var(--font-body-small_bold);
+  }
 }
 
 .productionNumber {
@@ -246,6 +343,11 @@
   aspect-ratio: 1;
   border-radius: var(--radius-12);
   font: var(--font-title-ttl_h2);
+
+  @media (max-width: 488px) {
+    width: var(--size-68);
+    font: var(--font-title-ttl_h3);
+  }
 }
 
 .productionIncrementContainer {
@@ -257,11 +359,19 @@
 .productionIncrement {
   font: var(--font-body-xlarge_regular);
   color: rgb(var(--color-green));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-large_regular);
+  }
 }
 
 .productionIcon {
   font-size: var(--size-68);
   color: rgb(var(--color-primary));
+
+  @media (max-width: 488px) {
+    font-size: var(--size-52);
+  }
 }
 
 .productivityDays {
@@ -274,6 +384,10 @@
 .productivityDaysTitle {
   font: var(--font-title-ttl_h3);
   color: rgb(var(--color-title));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-xlarge_bold);
+  }
 }
 
 .productivityDaysContent {
@@ -287,6 +401,10 @@
   display: flex;
   align-items: center;
   gap: var(--size-40);
+
+  @media (max-width: 488px) {
+    flex-direction: column;
+  }
 }
 
 .productivityDayStat {
@@ -299,6 +417,10 @@
 .productivityLabel {
   font: var(--font-body-xlarge_bold);
   color: rgb(var(--color-white));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-medium_bold);
+  }
 }
 
 .productivityDayContainer {
@@ -314,6 +436,10 @@
 
 .productivityDayWeekDay {
   font: var(--font-title-ttl_h2);
+
+  @media (max-width: 488px) {
+    font: var(--font-title-ttl_h3);
+  }
 }
 
 .positiveDay {
@@ -327,6 +453,10 @@
 .productivityDayMean {
   font: var(--font-body-large_regular);
   color: rgb(var(--color-white) / 0.5);
+
+  @media (max-width: 488px) {
+    font: var(--font-body-medium_regular);
+  }
 }
 
 .productivityTipContainer {
@@ -338,9 +468,15 @@
 .productivityTipIcon {
   font-size: var(--size-24);
   color: rgb(var(--color-yellow));
+
+  font-size: var(--size-16);
 }
 
 .productivityTipLabel {
   font: var(--font-body-large_regular);
   color: rgb(var(--color-white));
+
+  @media (max-width: 488px) {
+    font: var(--font-body-medium_regular);
+  }
 }
