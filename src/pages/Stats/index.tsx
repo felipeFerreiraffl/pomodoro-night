@@ -1,8 +1,87 @@
 import Icon from "@/components/Icon";
-import styles from "./styles.module.css";
+import { useTheme } from "@/services/contexts/themeContext";
 import { icons } from "@/utils/icons";
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  type ChartData,
+  type ChartOptions,
+} from "chart.js";
+import { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
+import styles from "./styles.module.css";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
 
 export default function Stats() {
+  const { theme } = useTheme();
+  const [chartKey, setChartKey] = useState<number>(0);
+
+  const getCSSVar = (variableName: string) => {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue(variableName)
+      .trim();
+  };
+
+  const chartLabels = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+  const data: ChartData<"bar"> = {
+    labels: chartLabels,
+    datasets: [
+      {
+        data: [1, 2, 0, 4, 2, 8, 2],
+        backgroundColor: `rgb(${getCSSVar("--color-primary")})`,
+        hoverBackgroundColor: `rgb(${getCSSVar("--color-primary")} / 0.8)`,
+      },
+    ],
+  };
+
+  const options: ChartOptions<"bar"> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    aspectRatio: 82 / 75,
+    locale: "pt-BR",
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        border: {
+          color: `rgb(${getCSSVar("--color-primary")})`,
+          width: 2,
+        },
+      },
+      y: {
+        type: "linear",
+        min: 0,
+        max: 12,
+        suggestedMin: 0,
+        suggestedMax: 12,
+        grid: {
+          display: false,
+        },
+        beginAtZero: true,
+        border: {
+          color: `rgb(${getCSSVar("--color-primary")})`,
+          width: 2,
+        },
+      },
+    },
+  };
+
+  // Força re-render do gráfico
+  useEffect(() => {
+    setChartKey((prev) => prev + 1);
+  }, [theme]);
+
   return (
     <>
       <main className={styles.main}>
@@ -75,6 +154,11 @@ export default function Stats() {
           </section>
 
           <section className={styles.periodStatsContainer}>
+            <div className={styles.periodStatsChartContainer}>
+              <h2 className={styles.periodStatsChartLabel}>Últimos 7 dias</h2>
+              <Bar key={chartKey} data={data} options={options} />
+            </div>
+
             <div className={styles.periodProductionContainer}>
               <h2 className={styles.periodProductionTitle}>
                 Qual período você é mais produtivo?

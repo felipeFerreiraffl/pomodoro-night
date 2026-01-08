@@ -131,6 +131,8 @@
   flex-direction: column;
   align-items: start;
   gap: var(--size-12);
+  max-height: 31.25rem;
+  width: 33.25rem;
 }
 
 .periodStatsChartLabel {
