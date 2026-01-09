@@ -13,6 +13,8 @@ import {
   type ReactNode,
 } from "react";
 import { useTasks } from "./taskContext";
+import type { PomodoroSession } from "@/types/stats.types";
+import { getPeriodOfDay } from "@/utils/helpers";
 
 /* eslint-disable react-refresh/only-export-components */
 const TimerContext = createContext<TimerContextType | undefined>(undefined);
@@ -151,6 +153,21 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
 
         incrementPomodoro(activeTask.id);
       }
+
+      const session: PomodoroSession = {
+        id: crypto.randomUUID(),
+        taskId: activeTask?.id || null,
+        date: new Date().toISOString().split("T")[0],
+        startTime: new Date(startTimeRef.current ?? Date.now()).toISOString(),
+        endTime: new Date().toISOString(),
+        completedAt: new Date().toISOString(),
+        duration: WORK_TIME,
+        phase: "POMODORO",
+        periodOfDay: getPeriodOfDay(),
+        dayOfWeek: new Date().getDay(),
+      };
+
+      localStorage.setItem("pomodoro-session", JSON.stringify(session));
 
       // Decide qual pausa vêm a seguir
       if (cycleCount % POMODOROS_FOR_LONG_BREAK === 0) {
