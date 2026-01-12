@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import styles from "./styles.module.css";
+import { useStats } from "@/services/contexts/statsContext";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
 
@@ -82,6 +83,8 @@ export default function Stats() {
     setChartKey((prev) => prev + 1);
   }, [theme]);
 
+  const { totalPomodoros, totalTasksCompleted } = useStats();
+
   return (
     <>
       <main className={styles.main}>
@@ -93,7 +96,7 @@ export default function Stats() {
               <h2 className={styles.countingTitle}>Total de pomodoros</h2>
 
               <div className={styles.numberContainer}>
-                <p className={styles.number}>20</p>
+                <p className={styles.number}>{totalPomodoros}</p>
                 <span className={styles.increment}>+2</span>
               </div>
             </div>
@@ -101,7 +104,7 @@ export default function Stats() {
               <h2 className={styles.countingTitle}>Tarefas concluídas</h2>
 
               <div className={styles.numberContainer}>
-                <p className={styles.number}>5</p>
+                <p className={styles.number}>{totalTasksCompleted}</p>
                 <span className={styles.increment}>+1</span>
               </div>
             </div>

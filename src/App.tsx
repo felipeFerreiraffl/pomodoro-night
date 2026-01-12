@@ -4,6 +4,7 @@ import { TimerProvider } from "./services/contexts/timerContext";
 import { TaskProvider } from "./services/contexts/taskContext";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { StatsProvider } from "./services/contexts/statsContext";
 
 // const isTouchDevice = "ontouchstart" in window;
 
@@ -13,7 +14,9 @@ export default function App() {
       <DndProvider backend={HTML5Backend}>
         <TaskProvider>
           <TimerProvider>
-            <AppRoutes />
+            <StatsProvider>
+              <AppRoutes />
+            </StatsProvider>
           </TimerProvider>
         </TaskProvider>
       </DndProvider>
