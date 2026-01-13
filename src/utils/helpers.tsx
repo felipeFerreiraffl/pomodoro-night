@@ -4,3 +4,7 @@ export const getPeriodOfDay = (): "morning" | "afternoon" | "night" => {
   if (hour >= 12 && hour < 18) return "afternoon";
   return "night";
 };
+
+export const getDateKey = (date: Date = new Date()): string => {
+  return date.toISOString().split("T")[0];
+};
