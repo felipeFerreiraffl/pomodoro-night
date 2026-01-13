@@ -40,6 +40,6 @@ export interface StatsContextType {
   leastProductiveDay: { day: string; avgPomodoros: number };
 
   mostProductivePeriod: () => string;
-  getStatsForDate: (date: number) => DailyStats | null;
+  getStatsForDate: (date: string) => DailyStats | null;
   getStatsForRange: (startTime: string, endTime: string) => DailyStats[];
 }

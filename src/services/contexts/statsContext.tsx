@@ -144,6 +144,15 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
 
   const { current, longest } = calculateStreak(sessions);
 
+  const todayStats = getStatsForDate(getDateKey());
+  const yesterdayStats = getStatsForDate(
+    getDateKey(new Date(Date.now() - 86400000))
+  );
+  const todayComparison =
+    todayStats && yesterdayStats
+      ? todayStats.completedPomodoros - yesterdayStats.completedPomodoros
+      : 0;
+
   const mostProductivePeriod = () => {
     const periods = sessions
       .filter((s) => s.phase === "POMODORO")
@@ -161,6 +170,9 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
     totalFocusTime,
     currentStreak: current,
     longestStreak: longest,
+    todayPomodoros: todayStats?.completedPomodoros,
+    yesterdayPomodoros: yesterdayStats?.completedPomodoros,
+    todayComparison,
     mostProductivePeriod,
   };
 
