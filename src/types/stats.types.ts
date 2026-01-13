@@ -36,10 +36,10 @@ export interface StatsContextType {
   yesterdayPomodoros: number;
   todayComparison: number;
   weekStats: DailyStats[];
-  mostProductivePeriod: "morning" | "afternoon" | "night";
   mostProductiveDay: { day: string; avgPomodoros: number };
   leastProductiveDay: { day: string; avgPomodoros: number };
 
+  mostProductivePeriod: () => string;
   getStatsForDate: (date: number) => DailyStats | null;
   getStatsForRange: (startTime: string, endTime: string) => DailyStats[];
 }
