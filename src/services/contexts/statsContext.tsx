@@ -1,4 +1,8 @@
-import type { PomodoroSession, StatsContextType } from "@/types/stats.types";
+import type {
+  DailyStats,
+  PomodoroSession,
+  StatsContextType,
+} from "@/types/stats.types";
 import { createContext, useContext, type ReactNode } from "react";
 import { useTasks } from "./taskContext";
 import { formatDuration } from "date-fns";
@@ -10,6 +14,58 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
   const { tasks } = useTasks();
 
   const sessions: PomodoroSession[] = [];
+
+  const getStatsForDate = (date: string): DailyStats | null => {
+    const sessionsOfDay = sessions.filter((s) => s.date === date);
+
+    if (sessionsOfDay.length === 0) return null;
+
+    const completedPomodoros = sessionsOfDay.filter(
+      (s) => s.phase === "POMODORO"
+    ).length;
+
+    const focusTime = sessionsOfDay
+      .filter((s) => s.phase === "POMODORO")
+      .reduce((acc, s) => acc + s.duration, 0);
+
+    const tasksCompleted = tasks.filter(
+      (t) => t.completedAt && getDateKey(t.completedAt) === date
+    ).length;
+
+    return {
+      date,
+      completedPomodoros,
+      focusTime,
+      tasksCompleted,
+      sessions: sessionsOfDay,
+    };
+  };
+
+  const getStatsForRange = (
+    startTime: string,
+    endTime: string
+  ): DailyStats[] => {
+    const start = new Date(startTime);
+    const end = new Date(endTime);
+    const stats: DailyStats[] = [];
+
+    for (let i = new Date(start); i <= end; i.setDate(i.getDate() + 1)) {
+      const dateKey = getDateKey(i);
+      const dayStats = getStatsForDate(dateKey);
+
+      stats.push(
+        dayStats || {
+          date: dateKey,
+          completedPomodoros: 0,
+          focusTime: 0,
+          tasksCompleted: 0,
+          sessions: [],
+        }
+      );
+    }
+
+    return stats;
+  };
 
   const totalPomodoros = sessions.filter((s) => s.phase === "POMODORO").length;
   const totalTasksCompleted = tasks.filter((t) => t.completed).length;
