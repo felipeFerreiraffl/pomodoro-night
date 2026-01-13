@@ -1,6 +1,7 @@
 import type { PomodoroSession, StatsContextType } from "@/types/stats.types";
 import { createContext, useContext, type ReactNode } from "react";
 import { useTasks } from "./taskContext";
+import { formatDuration } from "date-fns";
 
 const StatsContext = createContext<StatsContextType | undefined>(undefined);
 
@@ -15,9 +16,21 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
     .filter((s) => s.phase === "POMODORO")
     .reduce((acc, s) => acc + s.duration, 0);
 
+  const hours = Math.floor(focusTime / 3600);
+  const minutes = Math.floor((focusTime % 3600) / 3600);
+  const totalFocusTime = formatDuration({
+    hours,
+    minutes,
+  });
+
+  const currentStreak = {};
+  const longestStreak = {};
+  const todayPomodoros = {};
+
   const value: Partial<StatsContextType> = {
     totalPomodoros,
     totalTasksCompleted,
+    totalFocusTime,
   };
 
   return (
