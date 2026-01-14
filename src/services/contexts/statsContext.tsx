@@ -7,6 +7,7 @@ import { createContext, useContext, type ReactNode } from "react";
 import { useTasks } from "./taskContext";
 import { formatDuration } from "date-fns";
 import { getDateKey } from "@/utils/helpers";
+import { LAST_DAY } from "@/constants/consts";
 
 const StatsContext = createContext<StatsContextType | undefined>(undefined);
 
@@ -92,7 +93,7 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const today = getDateKey();
-    const yesterday = getDateKey(new Date(Date.now() - 86400000));
+    const yesterday = getDateKey(new Date(Date.now() - LAST_DAY));
 
     let currentStreak = 0;
     let longestStreak = 0;
@@ -107,7 +108,7 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
           currentStreak = 1;
         } else if (previousDate) {
           const diffMs = currentDate.getTime() - previousDate.getTime();
-          const diffDays = Math.floor(diffMs / 86400000);
+          const diffDays = Math.floor(diffMs / LAST_DAY);
 
           if (diffDays === 1) {
             currentStreak++;
@@ -123,7 +124,7 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
       const previousDate = new Date(dates[i - 1]);
 
       const diffMs = currentDate.getTime() - previousDate.getTime();
-      const diffDays = Math.floor(diffMs / 86400000);
+      const diffDays = Math.floor(diffMs / LAST_DAY);
 
       if (diffDays === 1) {
         tempStreak++;
@@ -146,7 +147,7 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
 
   const todayStats = getStatsForDate(getDateKey());
   const yesterdayStats = getStatsForDate(
-    getDateKey(new Date(Date.now() - 86400000))
+    getDateKey(new Date(Date.now() - LAST_DAY))
   );
   const todayComparison =
     todayStats && yesterdayStats
@@ -174,6 +175,8 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
     yesterdayPomodoros: yesterdayStats?.completedPomodoros,
     todayComparison,
     mostProductivePeriod,
+    getStatsForDate,
+    getStatsForRange,
   };
 
   return (
