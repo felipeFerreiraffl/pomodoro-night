@@ -7,7 +7,7 @@ import { createContext, useContext, type ReactNode } from "react";
 import { useTasks } from "./taskContext";
 import { formatDuration } from "date-fns";
 import { getDateKey } from "@/utils/helpers";
-import { LAST_DAY } from "@/constants/consts";
+import { LAST_DAY, LAST_WEEK } from "@/constants/consts";
 
 const StatsContext = createContext<StatsContextType | undefined>(undefined);
 
@@ -154,6 +154,11 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
       ? todayStats.completedPomodoros - yesterdayStats.completedPomodoros
       : 0;
 
+  const weekStats = getStatsForRange(
+    getDateKey(),
+    getDateKey(new Date(Date.now() - LAST_WEEK))
+  );
+
   const mostProductivePeriod = () => {
     const periods = sessions
       .filter((s) => s.phase === "POMODORO")
@@ -174,6 +179,7 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
     todayPomodoros: todayStats?.completedPomodoros,
     yesterdayPomodoros: yesterdayStats?.completedPomodoros,
     todayComparison,
+    weekStats,
     mostProductivePeriod,
     getStatsForDate,
     getStatsForRange,
