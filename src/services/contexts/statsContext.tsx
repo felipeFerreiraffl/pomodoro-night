@@ -1,5 +1,6 @@
 import type {
   DailyStats,
+  PeriodStats,
   PomodoroSession,
   StatsContextType,
 } from "@/types/stats.types";
@@ -159,16 +160,36 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
     getDateKey(new Date(Date.now() - LAST_WEEK))
   );
 
-  const mostProductivePeriod = () => {
-    const periods = sessions
-      .filter((s) => s.phase === "POMODORO")
-      .reduce((acc, s) => {
-        acc[s.periodOfDay] = (acc[s.periodOfDay] || 0) + 1;
-        return acc;
-      }, {} as Record<string, number>);
+  const periodsCount = sessions
+    .filter((s) => s.phase === "POMODORO")
+    .reduce((acc, s) => {
+      acc[s.periodOfDay] = (acc[s.periodOfDay] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
 
-    return Object.entries(periods).sort(([, a], [, b]) => b - a)[0][0];
+  const calculatePeriodStats = (): PeriodStats => {
+    const total = Object.values(periodsCount).reduce(
+      (sum, count) => sum + count,
+      0
+    );
+
+    return {
+      morning: {
+        count: periodsCount.morning || 0,
+        percentage: total > 0 ? (periodsCount.morning || 0) / total : 0,
+      },
+      afternoon: {
+        count: periodsCount.afternoon || 0,
+        percentage: total > 0 ? (periodsCount.afternoon || 0) / total : 0,
+      },
+      night: {
+        count: periodsCount.night || 0,
+        percentage: total > 0 ? (periodsCount.night || 0) / total : 0,
+      },
+    };
   };
+
+  const periodStats = calculatePeriodStats();
 
   const value: Partial<StatsContextType> = {
     totalPomodoros,
@@ -180,7 +201,7 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
     yesterdayPomodoros: yesterdayStats?.completedPomodoros,
     todayComparison,
     weekStats,
-    mostProductivePeriod,
+    periodStats,
     getStatsForDate,
     getStatsForRange,
   };

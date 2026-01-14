@@ -25,6 +25,12 @@ export interface StatsHistory {
   lastUpdated: string;
 }
 
+export interface PeriodStats {
+  morning: { count: number; percentage: number };
+  afternoon: { count: number; percentage: number };
+  night: { count: number; percentage: number };
+}
+
 export interface StatsContextType {
   sessions: PomodoroSession[];
   totalPomodoros: number;
@@ -36,10 +42,10 @@ export interface StatsContextType {
   yesterdayPomodoros: number;
   todayComparison: number;
   weekStats: DailyStats[];
+  periodStats: PeriodStats;
   mostProductiveDay: { day: string; avgPomodoros: number };
   leastProductiveDay: { day: string; avgPomodoros: number };
 
-  mostProductivePeriod: () => string;
   getStatsForDate: (date: string) => DailyStats | null;
   getStatsForRange: (startTime: string, endTime: string) => DailyStats[];
 }
