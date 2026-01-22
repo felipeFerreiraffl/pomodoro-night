@@ -1,3 +1,4 @@
+import { THEME_STORAGE_KEY } from "@/constants/consts";
 import type { Theme, ThemeContextType } from "@/types/theme.types";
 import {
   createContext,
@@ -14,7 +15,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     // Usa o tema definido anteriormente ou o padrão
-    const savedTheme = localStorage.getItem("theme") || "default";
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "default";
 
     if (
       savedTheme === "cyberpunk" ||
@@ -29,7 +30,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   // Salva o tema e cria o atributo do CSS (data-theme)
   useEffect(() => {
-    localStorage.setItem("theme", theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 

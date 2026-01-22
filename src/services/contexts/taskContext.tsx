@@ -1,3 +1,4 @@
+import { TASK_STORAGE_KEY } from "@/constants/consts";
 import type { Task, TaskAction, TaskContextType } from "@/types/task.type";
 import {
   createContext,
@@ -28,7 +29,7 @@ const tasksReducer = (state: Task[], action: TaskAction) => {
       return state.map((task) =>
         task?.id === action?.payload.id
           ? { ...task, ...action?.payload.updates }
-          : task
+          : task,
       );
     }
 
@@ -44,7 +45,7 @@ const tasksReducer = (state: Task[], action: TaskAction) => {
       return state.map((task) =>
         task.id === action.payload
           ? { ...task, completed: true, active: false, completedAt: new Date() }
-          : task
+          : task,
       );
     }
 
@@ -85,12 +86,9 @@ const tasksReducer = (state: Task[], action: TaskAction) => {
   }
 };
 
-// Funções de localStorage
-const STORAGE_KEY = "pomodoroTasks";
-
 const loadTasks = (): Task[] => {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(TASK_STORAGE_KEY);
 
     if (!saved) return [];
 
@@ -115,7 +113,7 @@ const saveTasks = (tasks: Task[]) => {
       active: false,
     }));
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(taskToSave));
+    localStorage.setItem(TASK_STORAGE_KEY, JSON.stringify(taskToSave));
   } catch (error) {
     console.error(`Erro ao salvar tarefas: ${error}`);
   }
@@ -134,7 +132,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     task: Omit<
       Task,
       "id" | "createdAt" | "completedPomodoros" | "active" | "completed"
-    >
+    >,
   ) => {
     dispatch({ type: "ADD_TASK", payload: task });
   };

@@ -15,6 +15,8 @@ import {
 import { useTasks } from "./taskContext";
 import type { PomodoroSession } from "@/types/stats.types";
 import { getPeriodOfDay } from "@/utils/helpers";
+import { useStats } from "./statsContext";
+import { TIMER_STORAGE_KEY } from "@/constants/consts";
 
 /* eslint-disable react-refresh/only-export-components */
 const TimerContext = createContext<TimerContextType | undefined>(undefined);
@@ -27,7 +29,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
 
   // Código antes para utilizar depois
   const loadTimerState = (): TimerState | null => {
-    const savedState = localStorage.getItem("pomodoroTimer");
+    const savedState = localStorage.getItem(TIMER_STORAGE_KEY);
 
     if (!savedState) {
       return null;
@@ -65,18 +67,19 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
   const initialState = loadTimerState();
 
   const { activeTask, incrementPomodoro, setActiveTask } = useTasks();
+  const { sessions } = useStats();
 
   const [timeLeft, setTimeLeft] = useState<number>(
-    initialState?.timeLeft ?? WORK_TIME
+    initialState?.timeLeft ?? WORK_TIME,
   );
   const [status, setStatus] = useState<TimerStatus>(
-    initialState?.status ?? "IDLE"
+    initialState?.status ?? "IDLE",
   );
   const [phase, setPhase] = useState<TimerPhase>(
-    initialState?.phase ?? "POMODORO"
+    initialState?.phase ?? "POMODORO",
   );
   const [pomodoroCount, setPomodoroCount] = useState<number>(
-    initialState?.pomodoroCount ?? 0
+    initialState?.pomodoroCount ?? 0,
   );
 
   const timerRef = useRef<number | null>(null);
@@ -99,7 +102,7 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
       date: new Date().toISOString().split("T")[0],
     };
 
-    localStorage.setItem("pomodoroTimer", JSON.stringify(state));
+    localStorage.setItem(TIMER_STORAGE_KEY, JSON.stringify(state));
   };
 
   const clearTimer = () => {
@@ -167,7 +170,10 @@ export const TimerProvider = ({ children }: { children: ReactNode }) => {
         dayOfWeek: new Date().getDay(),
       };
 
-      localStorage.setItem("pomodoro-session", JSON.stringify(session));
+      localStorage.setItem(
+        "pomodoroSessions",
+        JSON.stringify([...sessions, session]),
+      );
 
       // Decide qual pausa vêm a seguir
       if (cycleCount % POMODOROS_FOR_LONG_BREAK === 0) {
